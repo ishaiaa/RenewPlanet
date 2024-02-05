@@ -2,17 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Regions
-{
-    None,
-    North,
-    NorthWest,
-    SouthWest,
-    South,
-    East,
-    Central,
-    Mazowsze
-}
 
 public class RegionManager : MonoBehaviour
 {

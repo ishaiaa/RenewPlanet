@@ -7,8 +7,9 @@ public class ObjectPlacer : MonoBehaviour
     public GameObject objectToPlace;
     public RegionManager regionManager;
     public Camera referenceCamera;
-
     public GameObject instantiatedObject = null;
+
+    List<Placeable> intersectingObjects = new List<Placeable>();
 
     void Start()
     {
@@ -20,6 +21,12 @@ public class ObjectPlacer : MonoBehaviour
 
     void Update()
     {
+        foreach (Placeable placeable in intersectingObjects)
+        {
+            placeable.ToggleColliderState(CollisionState.Static);
+        }
+        intersectingObjects.Clear();
+
         if (instantiatedObject == null)
         {
             instantiatedObject = Instantiate(objectToPlace);
@@ -28,31 +35,63 @@ public class ObjectPlacer : MonoBehaviour
         Vector3 position = referenceCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         instantiatedObject.transform.position = new Vector3(position.x, position.y, -50f + position.y);
 
-        if (regionManager.selectedRegion != Regions.None)
-        {
-            Collider2D objectCollider = instantiatedObject.GetComponentInChildren<PolygonCollider2D>();
-            
-            if(objectCollider != null)
-            {
-                instantiatedObject.GetComponentInChildren<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f);
-                LayerMask layerMask = 6;
-                ContactFilter2D filter = new ContactFilter2D().NoFilter();
-                List<Collider2D> results = new List<Collider2D>();
-                
-                Debug.Log(objectCollider.OverlapCollider(filter, results));
+        Placeable objectControll = instantiatedObject.GetComponent<Placeable>();
+        objectControll.ToggleColliderState(CollisionState.Blocked);
 
-                if (objectCollider.OverlapCollider(filter, results) <= 2 && objectCollider.IsTouching(regionManager.regionCollider) && !objectCollider.IsTouching(regionManager.edgeCollider))
-                {
-                    instantiatedObject.GetComponentInChildren<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
-                        instantiatedObject.gameObject.layer = 6;
-                        Destroy(instantiatedObject.gameObject.GetComponentInChildren<Rigidbody2D>());
-                        instantiatedObject = null;
-                    }
-                }
+        if (regionManager.selectedRegion == Regions.None)
+        {
+            return;
+        }
+        
+        Collider2D objectCollider = objectControll.collider;
+
+        if (objectCollider == null)
+        {
+            return;
+        }
+
+        ContactFilter2D filter = new ContactFilter2D().NoFilter();
+        List<Collider2D> results = new List<Collider2D>();
+        int count = objectCollider.OverlapCollider(filter, results);
+        Debug.Log(count);
+
+        int placeableObjectsCount = 0;
+
+        if(count > 2)
+        {
+            Debug.Log("countPass");
+
+            foreach (Collider2D collider in results)
+            {
+                Placeable temp = collider.gameObject.GetComponentInParent<Placeable>();
+                if (temp == null) continue;
+                
+                placeableObjectsCount++;
+                temp.ToggleColliderState(CollisionState.Touching);
+                intersectingObjects.Add(temp);
             }
+        }
+
+        if(placeableObjectsCount > 0)
+        {
+            return;
+        }
+
+        if (objectCollider.IsTouching(regionManager.regionCollider) && !objectCollider.IsTouching(regionManager.edgeCollider))
+        {
+            objectControll.ToggleColliderState(CollisionState.Unrestricted);
+        }
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
+            instantiatedObject.gameObject.layer = 6;
+            objectControll.ToggleColliderState(CollisionState.Static);
+
+
+            Destroy(instantiatedObject.gameObject.GetComponentInChildren<Rigidbody2D>());
+            instantiatedObject = null;
+            objectControll = null;
         }
     }
 }
