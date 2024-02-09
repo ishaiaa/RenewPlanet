@@ -77,11 +77,13 @@ public class ObjectPlacer : MonoBehaviour
             return;
         }
 
-        if (objectCollider.IsTouching(regionManager.regionCollider) && !objectCollider.IsTouching(regionManager.edgeCollider))
+        if (!(objectCollider.IsTouching(regionManager.regionCollider) && !objectCollider.IsTouching(regionManager.edgeCollider)))
         {
-            objectControll.ToggleColliderState(CollisionState.Unrestricted);
+            return;
         }
         
+        objectControll.ToggleColliderState(CollisionState.Unrestricted);
+
         if (Input.GetMouseButtonDown(0))
         {
             instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
