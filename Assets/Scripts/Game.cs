@@ -14,6 +14,15 @@ public enum Regions
     Mazowsze
 }
 
+public enum ShopCategory
+{
+    None,
+    Powerplants,
+    Mines,
+    Nature,
+    Infrastructure
+}
+
 public enum CollisionState
 {
     Static,

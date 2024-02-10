@@ -29,7 +29,7 @@ public class ObjectPlacer : MonoBehaviour
 
         if (instantiatedObject == null)
         {
-            instantiatedObject = Instantiate(objectToPlace);
+            return;
         }
         
         Vector3 position = referenceCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
