@@ -99,7 +99,6 @@ public class UIManager : MonoBehaviour
     public void SelectShop(int categoryID)
     {
         ShopCategory category = (ShopCategory)categoryID;
-        Debug.Log(category);
         //if (timeDelta < 0.5f) return;
         timeDelta = 0f;
         selectedShop = selectedShop == category ? ShopCategory.None : category;

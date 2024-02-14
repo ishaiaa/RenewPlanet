@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,16 @@ public enum CollisionState
     Blocked
 }
 
+public enum CursorMode
+{
+    Idle,
+    Action,
+    Info,
+    Move,
+    Build,
+    Restricted,
+}
+
 public struct ColorPicker
 {
     public static Color white   = new Color(1f, 1f, 1f, 1f);
@@ -59,6 +70,7 @@ public static class Game
     public static bool trueValue = true;
 }
 
+[Serializable]
 public class ObjectData
 {
     public string name;
@@ -69,7 +81,6 @@ public class ObjectData
     public int efficiencyLevel;
     public int maxEfficiencyLevel;
     public EfficiencyLevel[] efficiencyLevels;
-    public float[] efficiencyUpgradesCost;
     public Sprite[] levelSprites;
 
     //Safety Levels (Usually 1-3, sometimes just 1)[1-default level, 2,3-upgrades]
@@ -77,7 +88,6 @@ public class ObjectData
     public int safetyLevel;
     public int maxSafetyLevel;
     public SafetyLevel[] safetyLevels;
-    public float[] safetyUpgradesCost;
 
 
 
@@ -92,6 +102,7 @@ public class ObjectData
     public float demolitionCost;
     public float demolitionTime;
 
+    public ObjectData() { }
 }
 
 public enum BuildState
@@ -102,6 +113,7 @@ public enum BuildState
     Demolition
 }
 
+[Serializable]
 public class EfficiencyLevel
 {
     //Build info
@@ -120,10 +132,13 @@ public class EfficiencyLevel
     public float energyProduction;                          //produced energy
     public float energyConsumption;                         //consumed energy
 
-    public Dictionary<Resources, float> resourceProduction;  //produced resources
-    public Dictionary<Resources, float> resourceConsumption; //consumed resources
+    public ResourceProduction[] resourceProduction;  //produced resources
+    public ResourceProduction[] resourceConsumption; //consumed resources
+
+    public EfficiencyLevel() { }
 }
 
+[Serializable]
 public class SafetyLevel
 {
     //Build info
@@ -135,6 +150,15 @@ public class SafetyLevel
 
     //Functional Info
     public float emmisionReduction; //CO2 emmision reduction
+
+    public SafetyLevel() { }
+}
+
+public enum ResourceType
+{
+    Coal,
+    Lignite,
+    Gas
 }
 
 public static class ResourceList
@@ -142,19 +166,65 @@ public static class ResourceList
     public static Resource coal = new Resource()
     {
         name = "Wêgiel Kamienny",
-        description = "Wungiel"
+        description = "Wungiel",
+        resourceType = ResourceType.Coal
     };
 
     public static Resource lignite = new Resource()
     {
         name = "Wêgiel Brunatny",
-        description = "Wungiel Braun"
+        description = "Wungiel Braun",
+        resourceType = ResourceType.Lignite
+    };
+
+    public static Resource gas = new Resource()
+    {
+        name = "Gaz Ziemny",
+        description = "Gaziemny",
+        resourceType = ResourceType.Gas
     };
 }
 
-public struct Resource
+
+[Serializable]
+public class Resource
 {
     public string name;
     public string description;
+    public ResourceType resourceType;
+
+    public Resource() {}
 }
+
+
+[Serializable]
+public class ResourceStorage
+{
+    public Resource resource;
+    public int quantity;
+
+    public ResourceStorage() { }
+
+    public ResourceStorage(Resource r, int q)
+    {
+        resource = r;
+        quantity = q;
+    }
+}
+
+[Serializable]
+public class ResourceProduction
+{
+    public ResourceType resource;
+    public int quantity;
+
+    public ResourceProduction() { }
+
+    public ResourceProduction(ResourceType r, int q)
+    {
+        resource = r;
+        quantity = q;
+    }
+}
+
 

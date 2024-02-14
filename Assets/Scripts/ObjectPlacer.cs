@@ -6,13 +6,16 @@ public class ObjectPlacer : MonoBehaviour
 {
     public GameObject objectToPlace;
     public RegionManager regionManager;
+    public GameManager gameManager;
     public Camera referenceCamera;
     public GameObject instantiatedObject = null;
+    HoverManager hoverManager;
 
     List<Placeable> intersectingObjects = new List<Placeable>();
 
     void Start()
     {
+        hoverManager = gameManager.gameObject.GetComponent<HoverManager>();
         if(objectToPlace != null)
         {
             instantiatedObject = Instantiate(objectToPlace);
@@ -31,7 +34,21 @@ public class ObjectPlacer : MonoBehaviour
         {
             return;
         }
-        
+
+        if (!gameManager.isCursorBusy)
+        {
+            hoverManager.SetCursor(CursorMode.Build, false, true, false);
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Destroy(instantiatedObject);
+                instantiatedObject = null;
+                return;
+            }
+        }
+
         Vector3 position = referenceCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         instantiatedObject.transform.position = new Vector3(position.x, position.y, -50f + position.y);
 
@@ -53,13 +70,11 @@ public class ObjectPlacer : MonoBehaviour
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
         List<Collider2D> results = new List<Collider2D>();
         int count = objectCollider.OverlapCollider(filter, results);
-        Debug.Log(count);
 
         int placeableObjectsCount = 0;
 
         if(count > 2)
         {
-            Debug.Log("countPass");
 
             foreach (Collider2D collider in results)
             {

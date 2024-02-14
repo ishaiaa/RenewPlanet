@@ -61,8 +61,6 @@ public class CameraManager : MonoBehaviour
         if (Input.mouseScrollDelta.y != 0)
         {
             cameraScale = Mathf.Clamp(cameraScale - (Input.mouseScrollDelta.y / 3f), minCameraScale, maxCameraScale);
-            
-
 
             Vector2 mousePosition1 = cameraReference.GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
 

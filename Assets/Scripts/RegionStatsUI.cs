@@ -22,44 +22,38 @@ public class RegionStatsUI : MonoBehaviour
 
     public List<StatsDisplay> statistics;
 
-    public struct RegionStatsData
+    RegionData GetRegionStats(Regions region)
     {
-        public float cash;
-        public int population;
-        public float energyStored;
-        public float energyDemand;
-        public float energyProduction;
-        public float emmisionCO2;
-
-        public RegionStatsData(float c, int p, float eS, float eD, float eP, float eCO2)
-        {
-            cash = c;
-            population = p;
-            energyStored = eS;
-            energyDemand = eD;
-            energyProduction = eP;
-            emmisionCO2 = eCO2;
-        }
+        return gameManager.GetRegionData(region);
     }
 
-    RegionStatsData GetRegionStats(Regions region)
+    public string FormatCash(double cash)
     {
-        return new RegionStatsData(0.0f, 0, 0.0f, 0.0f, 0.0f, 0.0f);
+        return string.Format("{0:N0}", cash);
     }
 
-    void UpdateStatsDisplay(Regions region, RegionStatsData data)
+    void UpdateStatsDisplay(Regions region, RegionData data)
     {
-        if(region == Regions.None)
-        {
-            regionTitle.text = "Ca³y Kraj";
-            return;
-        }
-        regionTitle.text = "Region " + regionManager.regionsNames[region];
+        //Stan Konta
+        //Populacja
+        //Przechowana Energia
+        //Zapotrzebowanie Na Energiê
+        //Produkcja Energii
+        //Poziom CO2
+
+        regionTitle.text = region == Regions.None? "Ca³y Kraj" : "Region " + regionManager.regionsNames[region];
+        statistics[0].cash.text = FormatCash(gameManager.GetCash());
+        statistics[1].cash.text = FormatCash(data.population);
+        statistics[2].cash.text = FormatCash(data.energyStored);
+        statistics[3].cash.text = FormatCash(data.energyDemand);
+        statistics[4].cash.text = FormatCash(data.energyDemand);
+        statistics[5].cash.text = FormatCash(data.emmisionCO2);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         Regions currentRegion = regionManager.selectedRegion;
         if (cameraManager.cameraScale >= 8f) currentRegion = Regions.None;
         UpdateStatsDisplay(currentRegion, GetRegionStats(currentRegion));
