@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 2291786429
+    locked: 0
   - name: Circle
     uniqueID: 1408847239
     locked: 0
