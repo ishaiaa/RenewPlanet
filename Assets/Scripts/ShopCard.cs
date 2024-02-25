@@ -47,13 +47,13 @@ public class ShopCard : MonoBehaviour
 
     public bool IsUnlocked()
     {
-        if (displayedLevel == 1) return true;
+        if (objectData.efficiencyLevels[displayedLevel-1].researchState == ResearchState.Researched) return true;
         return false;
     }
 
     public void TrySelectObject()
     {
-        //if (!IsUnlocked()) return;
+        if (!IsUnlocked()) return;
         ObjectPlacer placer = gameManager.GetComponent<ObjectPlacer>();
 
         double cost = 0;

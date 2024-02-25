@@ -169,6 +169,14 @@ public enum BuildState
     Demolition
 }
 
+public enum ResearchState
+{
+    Locked,
+    Researchable,
+    Researching,
+    Researched
+}
+
 [Serializable]
 public class EfficiencyLevel
 {
@@ -178,6 +186,11 @@ public class EfficiencyLevel
     public double timeCost;
     public string name;
     public string description;
+
+    public ResearchState researchState;
+    public double researchCost;
+    public double researchTime;
+    public double researchFinishTime;
 
     //Functional Info
     public double emmision;                                  //CO2 emmision

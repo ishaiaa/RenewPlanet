@@ -67,6 +67,7 @@ public class UIManager : MonoBehaviour
 
     float timeDelta = 0f;
     public float animationTime;
+    public ObjectInfoDisplay objectInfoDisplay;
 
     public ShopCategory selectedShop = ShopCategory.None;
 
@@ -99,7 +100,7 @@ public class UIManager : MonoBehaviour
     public void SelectShop(int categoryID)
     {
         ShopCategory category = (ShopCategory)categoryID;
-        //if (timeDelta < 0.5f) return;
+        if (category != ShopCategory.None) objectInfoDisplay.CloseCard();
         timeDelta = 0f;
         selectedShop = selectedShop == category ? ShopCategory.None : category;
     }

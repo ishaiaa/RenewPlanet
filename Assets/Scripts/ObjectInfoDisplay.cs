@@ -86,7 +86,7 @@ public class ObjectInfoDisplay : MonoBehaviour
         bool isUpgradeable = data.efficiencyLevel < data.maxEfficiencyLevel;
         bool notBusy = data.buildState == BuildState.Working;
         bool isAffordable = data.efficiencyLevels[data.efficiencyLevel - 1].cost <= gameManager.cash;
-        bool isUnlocked = true;
+        bool isUnlocked = data.efficiencyLevels[data.efficiencyLevel - 1].researchState == ResearchState.Researchable;
 
         if (isUnlocked && isAffordable && isUpgradeable && notBusy)
         {
