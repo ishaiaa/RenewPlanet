@@ -68,6 +68,49 @@ public struct ColorPicker
 public static class Game
 {
     public static bool trueValue = true;
+    public static string FormatCash(double cash)
+    {
+        return string.Format("{0:N0}", cash);
+    }
+
+    public static double UnixTimeStamp()
+    {
+        DateTime currentTime = DateTime.UtcNow;
+        double unixTime = ((DateTimeOffset)currentTime).ToUnixTimeSeconds();
+        return unixTime;
+    }
+
+    public static string FormatTime(float seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        return time.ToString(@"hh") + "h " + time.ToString(@"mm") + "m " + time.ToString(@"ss") + "s";
+    }
+
+    public static string FormatTime(double seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        return time.ToString(@"hh") + "h " + time.ToString(@"mm") + "m " + time.ToString(@"ss") + "s";
+    }
+
+    public static string FormatUnits(double watts)
+    {
+        //Peta
+        if (watts >= 1000000000000000)
+            return (watts / 1000000000000000).ToString("F2") + "P";
+        //Tera
+        if (watts >= 1000000000000)
+            return (watts / 1000000000000).ToString("F2") + "T";
+        //Giga
+        if (watts >= 1000000000)
+            return (watts / 1000000000).ToString("F2") + "G";
+        //Mega
+        if (watts >= 1000000)
+            return (watts / 1000000).ToString("F2") + "M";
+        //Kile
+        if (watts >= 1000)
+            return (watts / 1000).ToString("F2") + "k";
+        return watts.ToString("F2");
+    }
 }
 
 [Serializable]
@@ -76,6 +119,8 @@ public class ObjectData
     public string name;
     public string description;
 
+    public bool deconstructable;
+
     //Efficiency Levels (Always 1-3)[1-default level, 2,3-upgrades]
     //affects production, costs and emmision
     public int efficiencyLevel;
@@ -83,26 +128,37 @@ public class ObjectData
     public EfficiencyLevel[] efficiencyLevels;
     public Sprite[] levelSprites;
 
-    //Safety Levels (Usually 1-3, sometimes just 1)[1-default level, 2,3-upgrades]
-    //reduces emission
-    public int safetyLevel;
-    public int maxSafetyLevel;
-    public SafetyLevel[] safetyLevels;
-
-
 
     //defines whether the build is operative or not
     public BuildState buildState;
     public Sprite[] stateSprites; //states for building/upgrading/demolition
-    public float actionTime;      //time left for finishing an operation
+    public double finishTime;      //timestamp for when the build will be finished
 
 
 
     //deconstruction
-    public float demolitionCost;
-    public float demolitionTime;
+    public double demolitionCost;
+    public double demolitionTime;
 
     public ObjectData() { }
+    public ObjectData(ObjectData clone)
+    {
+        name = clone.name;
+        description = clone.description;
+
+        deconstructable = clone.deconstructable;
+        efficiencyLevel = clone.efficiencyLevel;
+        maxEfficiencyLevel = clone.maxEfficiencyLevel;
+        efficiencyLevels = clone.efficiencyLevels;
+        levelSprites = clone.levelSprites;
+
+        buildState = clone.buildState;
+        stateSprites = clone.stateSprites;
+        finishTime = clone.finishTime;    
+
+        demolitionCost = clone.demolitionCost;
+        demolitionTime = clone.demolitionTime;
+    }
 }
 
 public enum BuildState
@@ -118,19 +174,19 @@ public class EfficiencyLevel
 {
     //Build info
     public int level;
-    public float cost;
-    public float timeCost;
+    public double cost;
+    public double timeCost;
     public string name;
     public string description;
 
     //Functional Info
-    public float emmision;                                  //CO2 emmision
+    public double emmision;                                  //CO2 emmision
 
-    public float profit;                                    //generated profit
-    public float operativeCost;                             //cost of running
+    public double profit;                                    //generated profit
+    public double operativeCost;                             //cost of running
 
-    public float energyProduction;                          //produced energy
-    public float energyConsumption;                         //consumed energy
+    public double energyProduction;                          //produced energy
+    public double energyConsumption;                         //consumed energy
 
     public ResourceProduction[] resourceProduction;  //produced resources
     public ResourceProduction[] resourceConsumption; //consumed resources
@@ -143,13 +199,13 @@ public class SafetyLevel
 {
     //Build info
     public int level;
-    public float cost;
-    public float timeCost;
+    public double cost;
+    public double timeCost;
     public string name;
     public string description;
 
     //Functional Info
-    public float emmisionReduction; //CO2 emmision reduction
+    public double emmisionReduction; //CO2 emmision reduction
 
     public SafetyLevel() { }
 }
@@ -157,7 +213,7 @@ public class SafetyLevel
 public enum ResourceType
 {
     Coal,
-    Lignite,
+    Uranium,
     Gas
 }
 
@@ -170,11 +226,11 @@ public static class ResourceList
         resourceType = ResourceType.Coal
     };
 
-    public static Resource lignite = new Resource()
+    public static Resource uranium = new Resource()
     {
-        name = "Wêgiel Brunatny",
-        description = "Wungiel Braun",
-        resourceType = ResourceType.Lignite
+        name = "Uran",
+        description = "From jurij ovsienko",
+        resourceType = ResourceType.Uranium
     };
 
     public static Resource gas = new Resource()

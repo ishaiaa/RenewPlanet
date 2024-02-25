@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public GameObject cameraReference;
+    public GameManager gameManager;
     public Camera zoomCameraReference;
     public Camera staticCameraReference;
     public GameObject clouds;
@@ -34,7 +35,9 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(2))
+        if (gameManager.isCursorBusy) return;
+        if (gameManager.isGamePaused) return;
+        if (Input.GetMouseButtonDown(2))
         {
             isMouseDown = true;
             mouseDragPos = zoomCameraReference.ScreenToWorldPoint(Input.mousePosition);
@@ -77,6 +80,5 @@ public class CameraManager : MonoBehaviour
             }
 
         }
-
     }
 }

@@ -18,6 +18,7 @@ public class HoverManager : MonoBehaviour
     public GameObject leftButtonPlaceObject;
     public GameObject rightButtonInformation;
 
+
     public void SetCursor(CursorMode mode)
     {
         switch(mode)

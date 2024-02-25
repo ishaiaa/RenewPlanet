@@ -13,17 +13,51 @@ public class ObjectPlacer : MonoBehaviour
 
     List<Placeable> intersectingObjects = new List<Placeable>();
 
+    double buildPrice = Mathf.Infinity;
+    double buildTime = Mathf.Infinity;
+
+    public void TryCreateInstance(ObjectData dataCopy, int level, double price, double time)
+    {
+        if (gameManager.isGamePaused) return;
+        ObjectData data = new ObjectData(dataCopy);
+        if (objectToPlace != null)
+        {
+            Destroy(instantiatedObject);
+            buildPrice = Mathf.Infinity;
+            buildTime = Mathf.Infinity;
+        }
+        data.efficiencyLevel = level;
+        instantiatedObject = Instantiate(objectToPlace);
+        Placeable objectConfig = instantiatedObject.GetComponent<Placeable>();
+        objectConfig.objectData = data;
+        objectConfig.isPlaced = false;
+        objectConfig.UpdateVisuals();
+        buildPrice = price;
+        buildTime = time;
+    }
+
     void Start()
     {
         hoverManager = gameManager.gameObject.GetComponent<HoverManager>();
-        if(objectToPlace != null)
-        {
-            instantiatedObject = Instantiate(objectToPlace);
-        }
+        //if (objectToPlace != null)
+        //{
+        //    instantiatedObject = Instantiate(objectToPlace);
+        //}
     }
 
     void Update()
     {
+        if (gameManager.isGamePaused)
+        {
+            if(instantiatedObject != null)
+            {
+                buildPrice = Mathf.Infinity;
+                buildTime = Mathf.Infinity;
+                Destroy(instantiatedObject);
+                instantiatedObject = null;
+            }
+        }
+
         foreach (Placeable placeable in intersectingObjects)
         {
             placeable.ToggleColliderState(CollisionState.Static);
@@ -101,14 +135,25 @@ public class ObjectPlacer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (gameManager.cash < buildPrice) return; //TOO LOW ON CASH
+            gameManager.cash -= buildPrice;
+
             instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
             instantiatedObject.gameObject.layer = 6;
+            instantiatedObject.gameObject.name = objectControll.objectData.name;
+            objectControll.isPlaced = true;
             objectControll.ToggleColliderState(CollisionState.Static);
-
+            objectControll.objectData.finishTime = Game.UnixTimeStamp()+buildTime;
+            objectControll.objectData.buildState = BuildState.Contstruction;
+            objectControll.UpdateVisuals();
 
             Destroy(instantiatedObject.gameObject.GetComponentInChildren<Rigidbody2D>());
             instantiatedObject = null;
             objectControll = null;
+            hoverManager.SetCursor(CursorMode.Idle, false, false, false);
+
+            buildPrice = Mathf.Infinity;
+            buildTime = Mathf.Infinity;
         }
     }
 }

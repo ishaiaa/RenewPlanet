@@ -8,6 +8,9 @@ public class Pause : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject PauseMenuUI;
+    public GameManager gameManager;
+    public GameObject pauseCameraCollider;
+
     // Update is called once per frame
     void Update()
     {
@@ -27,15 +30,19 @@ public class Pause : MonoBehaviour
     public void ResumeGame()
     {
         PauseMenuUI.SetActive(false);
+        pauseCameraCollider.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        gameManager.isGamePaused = false;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         PauseMenuUI.SetActive(true);
+        pauseCameraCollider.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        gameManager.isGamePaused = true;
     }
 
     public void LoadMenu()

@@ -7,10 +7,43 @@ public class Placeable : MonoBehaviour
     
     
     public Collider2D collider;
+
     public SpriteRenderer objectSprite;
+    public SpriteRenderer overlaySprite;
     public SpriteRenderer hitboxSprite;
 
+    public ObjectData objectData;
+
     public CollisionState collisionState = CollisionState.Static;
+    public bool isPlaced = false;
+
+    float timeTick = 0f;
+    public void UpdateVisuals()
+    {
+        switch (objectData.buildState)
+        {
+            case BuildState.Contstruction:
+                objectSprite.sprite = objectData.stateSprites[0];
+                overlaySprite.sprite = null;
+                break;
+            case BuildState.Working:
+                objectSprite.sprite = objectData.levelSprites[objectData.efficiencyLevel-1];
+                overlaySprite.sprite = null;
+                break;
+            case BuildState.Upgrade:
+                objectSprite.sprite = objectData.levelSprites[objectData.efficiencyLevel - 1];
+                overlaySprite.sprite = objectData.stateSprites[1];
+                break;
+            case BuildState.Demolition:
+                objectSprite.sprite = objectData.levelSprites[objectData.efficiencyLevel - 1];
+                overlaySprite.sprite = objectData.stateSprites[1];
+                break;
+            default:
+                objectSprite.sprite = null;
+                overlaySprite.sprite = null;
+                break;
+        }
+    }
 
     public void ToggleColliderState(CollisionState state)
     {

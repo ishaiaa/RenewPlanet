@@ -8,11 +8,11 @@ using UnityEngine;
 public class RegionData
 {
     public int population;
-    public float energyStored;
-    public float energyDemand;
-    public float energyProduction;
-    public float emmisionCO2;
-    public float area;
+    public double energyStored;
+    public double energyDemand;
+    public double energyProduction;
+    public double emmisionCO2;
+    public double area;
     public List<ResourceStorage> resources;
 
     
@@ -27,7 +27,7 @@ public class RegionData
         resources = new List<ResourceStorage>()
         {
             new ResourceStorage(ResourceList.coal,    0),
-            new ResourceStorage(ResourceList.lignite, 0),
+            new ResourceStorage(ResourceList.uranium, 0),
             new ResourceStorage(ResourceList.gas,     0),
         };
     }
@@ -39,7 +39,7 @@ public class RegionData
             resources = new List<ResourceStorage>()
             {
                 new ResourceStorage(ResourceList.coal,    0),
-                new ResourceStorage(ResourceList.lignite, 0),
+                new ResourceStorage(ResourceList.uranium, 0),
                 new ResourceStorage(ResourceList.gas,     0),
             };
         }

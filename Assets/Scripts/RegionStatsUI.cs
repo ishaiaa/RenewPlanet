@@ -42,12 +42,12 @@ public class RegionStatsUI : MonoBehaviour
         //Poziom CO2
 
         regionTitle.text = region == Regions.None? "Ca³y Kraj" : "Region " + regionManager.regionsNames[region];
-        statistics[0].cash.text = FormatCash(gameManager.GetCash());
-        statistics[1].cash.text = FormatCash(data.population);
-        statistics[2].cash.text = FormatCash(data.energyStored);
-        statistics[3].cash.text = FormatCash(data.energyDemand);
-        statistics[4].cash.text = FormatCash(data.energyDemand);
-        statistics[5].cash.text = FormatCash(data.emmisionCO2);
+        statistics[0].cash.text = Game.FormatCash(gameManager.GetCash());
+        statistics[1].cash.text = Game.FormatCash(data.population);
+        statistics[2].cash.text = Game.FormatUnits(data.energyStored) + "W";
+        statistics[3].cash.text = Game.FormatUnits(data.energyDemand) + "W/h";
+        statistics[4].cash.text = Game.FormatUnits(data.energyDemand) + "W/h";
+        statistics[5].cash.text = Game.FormatCash(data.emmisionCO2)+"t";
     }
 
     // Update is called once per frame

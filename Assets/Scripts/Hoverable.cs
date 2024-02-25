@@ -20,6 +20,7 @@ public class Hoverable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void Start()
     {
+        Debug.Log("BRBdasdasRB");
         gameManagerObject = GameObject.Find("GameManager") ?? null;
         if (gameManagerObject == null) return;
         hoverManager = gameManagerObject.GetComponent<HoverManager>();
