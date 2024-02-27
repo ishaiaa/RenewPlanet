@@ -123,19 +123,11 @@ public class ObjectPlacer : MonoBehaviour
 
         if(placeableObjectsCount > 0)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                gameManager.toastManager.Toast("Nie mo¿esz umieœciæ tutaj tego obiektu!", ToastMode.Error, 5f);
-            }
             return;
         }
 
         if (!(objectCollider.IsTouching(regionManager.regionCollider) && !objectCollider.IsTouching(regionManager.edgeCollider)))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                gameManager.toastManager.Toast("Nie mo¿esz umieœciæ tutaj tego obiektu!", ToastMode.Error, 5f);
-            }
             return;
         }
         
@@ -143,16 +135,7 @@ public class ObjectPlacer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (gameManager.cash < buildPrice)
-            {
-                gameManager.toastManager.Toast("Niewystarczaj¹ca iloœæ pieniêdzy!", ToastMode.Error, 5f);
-                return; //TOO LOW ON CASH
-            }
-            if(gameManager.DoesExistInRegion(objectControll, regionManager.selectedRegion))
-            {
-                gameManager.toastManager.Toast("Mo¿esz umieœciæ tylko jeden taki budynek w regionie!", ToastMode.Error, 5f);
-                return;
-            }
+            if (gameManager.cash < buildPrice) return; //TOO LOW ON CASH
             gameManager.cash -= buildPrice;
 
             instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
@@ -164,8 +147,6 @@ public class ObjectPlacer : MonoBehaviour
             objectControll.objectData.finishTime = Game.UnixTimeStamp()+buildTime;
             objectControll.objectData.buildState = BuildState.Contstruction;
             objectControll.UpdateVisuals();
-
-            gameManager.toastManager.Toast("Umieszczono Obiekt", ToastMode.Success, 5f);
 
             Destroy(instantiatedObject.gameObject.GetComponentInChildren<Rigidbody2D>());
             instantiatedObject = null;

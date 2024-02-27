@@ -1203,6 +1203,49 @@ Transform:
   m_LocalPosition: {x: -8, y: 74, z: 0}
   m_LocalScale: {x: 48.598423, y: 68.02026, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
+  m_Children:
+  - {fileID: 1692826653}
+  - {fileID: 257751761}
+  - {fileID: 2095471831}
+  m_Father: {fileID: 1386588652}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -149.64}
+  m_SizeDelta: {x: 132.1826, y: 30}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &73521707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73521708}
+  - component: {fileID: 73521709}
+  m_Layer: 5
+  m_Name: Paper-Edges-3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &73521708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73521707}
+  m_LocalRotation: {x: -0, y: -0, z: 0.089848675, w: 0.99595547}
+  m_LocalPosition: {x: -8, y: 74, z: 0}
+  m_LocalScale: {x: 48.598423, y: 68.02026, z: 1}
+  m_ConstrainProportionsScale: 0
+=======
+>>>>>>> parent of d8b012b (Merge branch 'main' of https://github.com/ishaiaa/RenewPlanet)
   m_Children: []
   m_Father: {fileID: 163672130}
   m_RootOrder: 1
@@ -15998,6 +16041,8 @@ RectTransform:
   m_AnchoredPosition: {x: 21.1506, y: 31.971085}
   m_SizeDelta: {x: 227.9427, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
+=======
 --- !u!1 &842260367
 GameObject:
   m_ObjectHideFlags: 0
@@ -16074,6 +16119,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842260367}
   m_CullTransparentMesh: 1
+>>>>>>> parent of d8b012b (Merge branch 'main' of https://github.com/ishaiaa/RenewPlanet)
 --- !u!1 &844564816
 GameObject:
   m_ObjectHideFlags: 0
@@ -36456,6 +36502,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902291848}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
+=======
 --- !u!1 &1910142929
 GameObject:
   m_ObjectHideFlags: 0
@@ -36520,6 +36568,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+>>>>>>> parent of d8b012b (Merge branch 'main' of https://github.com/ishaiaa/RenewPlanet)
 --- !u!1 &1913081814
 GameObject:
   m_ObjectHideFlags: 0

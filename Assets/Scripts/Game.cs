@@ -43,20 +43,6 @@ public enum CursorMode
     Restricted,
 }
 
-public enum ToastState
-{
-    FadeIn,
-    Display,
-    FadeOut
-}
-public enum ToastMode
-{
-    Info,
-    Warning,
-    Error,
-    Success
-}
-
 public struct ColorPicker
 {
     public static Color white   = new Color(1f, 1f, 1f, 1f);
@@ -134,7 +120,6 @@ public class ObjectData
     public string name;
     public string description;
 
-    public bool isRegionLimited;
     public bool deconstructable;
 
     //Efficiency Levels (Always 1-3)[1-default level, 2,3-upgrades]
@@ -162,7 +147,6 @@ public class ObjectData
         name = clone.name;
         description = clone.description;
 
-        isRegionLimited = clone.isRegionLimited;
         deconstructable = clone.deconstructable;
         efficiencyLevel = clone.efficiencyLevel;
         maxEfficiencyLevel = clone.maxEfficiencyLevel;
@@ -203,7 +187,6 @@ public class EfficiencyLevel
     public double timeCost;
     public string name;
     public string description;
-    public string funFact;
 
     public ResearchState researchState;
     public double researchCost;
@@ -270,24 +253,6 @@ public static class ResourceList
         description = "Gaziemny",
         resourceType = ResourceType.Gas
     };
-
-    public static string GetNameByType(ResourceType type)
-    {
-        foreach(Resource r in new Resource[]{coal,uranium,gas})
-        {
-            if (r.resourceType == type) return r.name;
-        }
-        return "";
-    }
-
-    public static string GetDescriptionByType(ResourceType type)
-    {
-        foreach (Resource r in new Resource[] { coal, uranium, gas })
-        {
-            if (r.resourceType == type) return r.description;
-        }
-        return "";
-    }
 }
 
 

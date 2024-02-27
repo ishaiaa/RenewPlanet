@@ -55,18 +55,19 @@ MonoBehaviour:
   objectData:
     name: 
     description: 
-    deconstructable: 0
     efficiencyLevel: 0
     maxEfficiencyLevel: 0
     efficiencyLevels: []
     levelSprites: []
+    safetyLevel: 0
+    maxSafetyLevel: 0
+    safetyLevels: []
     buildState: 0
     stateSprites: []
     finishTime: 0
     demolitionCost: 0
     demolitionTime: 0
   collisionState: 0
-  isPlaced: 0
 --- !u!1 &936850913528625418
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +418,7 @@ GameObject:
   - component: {fileID: 2399954406800209196}
   - component: {fileID: 3256353775320159731}
   m_Layer: 6
-  m_Name: Hitbox
+  m_Name: HitboxVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

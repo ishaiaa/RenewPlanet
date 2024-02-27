@@ -181,40 +181,7 @@ public class ObjectInfoDisplay : MonoBehaviour
         statsText += "\n";
         statsText += "Aktualny poziom: " + data.efficiencyLevel + "\n";
         
-        if(data.isRegionLimited)
-        {
-            statsText += "Można zbudowac tylko jeden element tego typu w regionie.\n";
-        }
-        if (!data.deconstructable)
-        {
-            statsText += "Tego budynku nie można zburzyć.\n";
-        }
-
-        if(data.name == "Budynek Administracyjny")
-        {
-            statsText += "\n";
-            statsText += "Maksymalny próg emisji CO2:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + gameManager.emmisionTresholds[0] + "ppm:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + gameManager.emmisionTresholds[1] + "ppm:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + gameManager.emmisionTresholds[2] + "ppm:\n";
-
-            statsText += "\n";
-            statsText += "Maksymalna ilość prac budowlanych na jeden region:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
-        }
-
-        if (data.name == "Ośrodek Badawczy")
-        {
-            statsText += "\n";
-            statsText += "Maksymalna ilość badań w tym samym czasie:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
-        }
-
-        if (data.efficiencyLevels[data.efficiencyLevel-1].energyProduction > 0)
+        if(data.efficiencyLevels[data.efficiencyLevel-1].energyProduction > 0)
         {
             statsText += "\n";
             statsText += "Produkcja energii:\n";
@@ -223,7 +190,7 @@ public class ObjectInfoDisplay : MonoBehaviour
             statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + Game.FormatUnits(data.efficiencyLevels[2].energyProduction) + "W/h:\n";
         }
 
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision > 0f)
+        if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision >= 0f)
         {
             statsText += "\n";
             statsText += "Emisja CO2:\n";
@@ -242,34 +209,14 @@ public class ObjectInfoDisplay : MonoBehaviour
 
         if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceConsumption.Length > 0)
         {
-            ResourceProduction rP1 = data.efficiencyLevels[0].resourceConsumption[0];
-            ResourceProduction rP2 = data.efficiencyLevels[1].resourceConsumption[0];
-            ResourceProduction rP3 = data.efficiencyLevels[2].resourceConsumption[0];
-            
-            
             statsText += "\n";
-            statsText += "Wykorzystywany surowiec: " + ResourceList.GetNameByType(rP1.resource);
-            statsText += "\nZużycie surowca:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity+"t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity+"t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity+"t/h:\n";
+            statsText += "Wykorzystywany surowiec: Węgiel Kamienny\n";
+            statsText += "Zużycie surowca:\n";
+            statsText += "○ Poziom 1: 0t/h:\n";
+            statsText += "● Poziom 2: 0t/h:\n";
+            statsText += "○ Poziom 3: 0t/h:\n";
         }
-
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceProduction.Length > 0)
-        {
-            ResourceProduction rP1 = data.efficiencyLevels[0].resourceProduction[0];
-            ResourceProduction rP2 = data.efficiencyLevels[1].resourceProduction[0];
-            ResourceProduction rP3 = data.efficiencyLevels[2].resourceProduction[0];
-
-
-            statsText += "\n";
-            statsText += "Produkowany surowiec: " + ResourceList.GetNameByType(rP1.resource);
-            statsText += "\nProdukcja surowca:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity + "t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity + "t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity + "t/h:\n";
-        }
-
+        
         stats.text = statsText;
     }
 
@@ -308,9 +255,7 @@ public class ObjectInfoDisplay : MonoBehaviour
 
     public void MoveObject()
     {
-        if (placeable == null) return;
-        gameManager.gameObject.GetComponent<ObjectMover>().MoveObject(placeable.gameObject);
-        SetDisplay();
+        Debug.Log("Move");
     }
 
     public void CloseCard()
