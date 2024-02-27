@@ -55,7 +55,7 @@ public class ResearchManager : MonoBehaviour
         if (gameManager.cash < selectedCard.efficiencyLevel.researchCost) return;
 
         selectedCard.efficiencyLevel.researchState = ResearchState.Researching;
-        selectedCard.efficiencyLevel.researchFinishTime = Game.UnixTimeStamp();//+ selectedCard.efficiencyLevel.researchTime;
+        selectedCard.efficiencyLevel.researchFinishTime = Game.UnixTimeStamp() + selectedCard.efficiencyLevel.researchTime;
         gameManager.cash -= selectedCard.efficiencyLevel.researchCost;
         ongoingResearch.Add(selectedCard);
         selectedCard.UpdateVisuals();
