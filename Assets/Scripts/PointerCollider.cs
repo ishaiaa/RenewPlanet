@@ -34,7 +34,7 @@ public class PointerCollider : MonoBehaviour
         int count = pointerCollider.OverlapCollider(filter, results);
 
 
-        if (count > 2)
+        if (count > 1)
         {
 
             foreach (Collider2D collider in results)

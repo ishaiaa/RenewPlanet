@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject researchFacility;
     public GameObject ministryFacility;
 
+    public ToastManager toastManager;
+
+    public double[] emmisionTresholds = new double[] {1100,1300,1500};
+
     public bool isGamePaused = false;
 
     public static bool IsCursorBusy()
@@ -103,6 +107,15 @@ public class GameManager : MonoBehaviour
         return null;
     } 
 
+    public bool DoesExistInRegion(Placeable placeable, Regions region)
+    {
+        GameObject[] copies = GameObject.FindGameObjectsWithTag(placeable.objectData.name);
+        foreach (GameObject obj in copies)
+        {
+            if (obj.transform.parent.gameObject.GetComponent<RegionHover>().region == region) return true;
+        }
+        return false;
+    }
 
     void Start()
     {
@@ -154,14 +167,18 @@ public class GameManager : MonoBehaviour
                         {
                             case (BuildState.Contstruction):
                                 data.buildState = BuildState.Working;
+                                toastManager.Toast("Ukoñczono budowê - " + data.efficiencyLevels[data.efficiencyLevel-1].name, ToastMode.Info, 5f);
                                 prop.UpdateVisuals();
                                 break;
                             case (BuildState.Upgrade):
                                 data.buildState = BuildState.Working;
                                 data.efficiencyLevel = Mathf.Clamp(data.efficiencyLevel + 1, 1, data.maxEfficiencyLevel);
+                                toastManager.Toast("Ulepszono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
+
                                 prop.UpdateVisuals();
                                 break;
                             case (BuildState.Demolition):
+                                toastManager.Toast("Wyburzono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
                                 Destroy(prop.gameObject);
                                 break;
                             default:

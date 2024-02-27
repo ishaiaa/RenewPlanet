@@ -50,9 +50,21 @@ public class ResearchManager : MonoBehaviour
     public void StartResearch()
     {
         if (selectedCard == null) return;
-        if (selectedCard.efficiencyLevel.researchState != ResearchState.Researchable) return;
-        if (gameManager.GetResearchCap() <= ongoingResearch.Count) return;
-        if (gameManager.cash < selectedCard.efficiencyLevel.researchCost) return;
+        if (selectedCard.efficiencyLevel.researchState != ResearchState.Researchable)
+        {
+            gameManager.toastManager.Toast("Nie mo¿esz przeprowadziæ badañ nad t¹ technologi¹!", ToastMode.Error, 5f);
+            return;
+        }
+        if (gameManager.GetResearchCap() <= ongoingResearch.Count) 
+        {
+            gameManager.toastManager.Toast("Nie mo¿esz prowadziæ wiêcej badañ równoczeœnie!", ToastMode.Error, 5f);
+            return;
+        }
+        if (gameManager.cash < selectedCard.efficiencyLevel.researchCost)
+        {
+            gameManager.toastManager.Toast("Nie masz wystarczaj¹cej iloœci pieniêdzy!", ToastMode.Error, 5f);
+            return;
+        }
 
         selectedCard.efficiencyLevel.researchState = ResearchState.Researching;
         selectedCard.efficiencyLevel.researchFinishTime = Game.UnixTimeStamp() + selectedCard.efficiencyLevel.researchTime;
@@ -193,6 +205,8 @@ public class ResearchManager : MonoBehaviour
                 researchCardsReferences[GetIndexInList(rCard) + 1].efficiencyLevel.researchState = ResearchState.Researchable;
                 researchCardsReferences[GetIndexInList(rCard) + 1].UpdateVisuals();
             }
+            gameManager.toastManager.Toast("Ukoñczono Badania - " +rCard.efficiencyLevel.name, ToastMode.Info, 5f);
+
             UpdateCorrespondingShopCard(rCard);
             UpdateWorld(rCard);
         }
