@@ -1337,7 +1337,49 @@ MonoBehaviour:
   m_ConstraintCount: 1
 --- !u!1 &66801821
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66801822}
+  m_Layer: 5
+  m_Name: LevelIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &66801822
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66801821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1692826653}
+  - {fileID: 257751761}
+  - {fileID: 2095471831}
+  m_Father: {fileID: 1386588652}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -149.64}
+  m_SizeDelta: {x: 132.1826, y: 30}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &73521707
+>>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15831,6 +15873,7 @@ RectTransform:
   m_SizeDelta: {x: 227.9427, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &840905732
 GameObject:
   m_ObjectHideFlags: 0
@@ -15907,6 +15950,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840905732}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 =======
 >>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 --- !u!1 &844564816
@@ -35875,6 +35920,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1902291848}
   m_CullTransparentMesh: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1912450049
 GameObject:
   m_ObjectHideFlags: 0
@@ -35951,6 +35997,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912450049}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 =======
 >>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 --- !u!1 &1913081814
