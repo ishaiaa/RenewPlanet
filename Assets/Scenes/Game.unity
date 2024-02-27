@@ -16085,6 +16085,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!1 &842260367
 GameObject:
@@ -16163,6 +16164,8 @@ CanvasRenderer:
   m_GameObject: {fileID: 842260367}
   m_CullTransparentMesh: 1
 >>>>>>> parent of d8b012b (Merge branch 'main' of https://github.com/ishaiaa/RenewPlanet)
+=======
+>>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 =======
 >>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 --- !u!1 &844564816
@@ -36056,6 +36059,7 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!1 &1910142929
 GameObject:
@@ -36122,6 +36126,8 @@ MonoBehaviour:
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 >>>>>>> parent of d8b012b (Merge branch 'main' of https://github.com/ishaiaa/RenewPlanet)
+=======
+>>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 =======
 >>>>>>> parent of 6e669a1 (Toasts+Completed few TO-DO's)
 --- !u!1 &1913081814
