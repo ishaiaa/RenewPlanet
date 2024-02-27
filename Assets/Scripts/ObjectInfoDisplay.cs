@@ -36,18 +36,22 @@ public class ObjectInfoDisplay : MonoBehaviour
 
     void Start()
     {
-        gameObject.SetActive(false);
+        uiManager.SelectShop((int)ShopCategory.None);
     }
 
     public void SetDisplay()
     {
-        gameManager.isCursorBusy = false;
         gameManager.gameObject.GetComponent<HoverManager>().SetCursor(CursorMode.Idle);
         gameManager.gameObject.GetComponent<HoverManager>().DisplayTooltip();
         placeable = null;
         data = null;
-        gameObject.SetActive(false);
-        
+        uiManager.SelectShop((int)ShopCategory.None);
+    }
+
+    public void ClearDisplay()
+    {
+        placeable = null;
+        data = null;
     }
     public void SetDisplay(Placeable p)
     {
@@ -59,7 +63,7 @@ public class ObjectInfoDisplay : MonoBehaviour
         uiManager.SelectShop(0);
         placeable = p;
         data = p.objectData;
-        gameObject.SetActive(true);
+        uiManager.SelectShop((int)ShopCategory.ObjectInfo);
         updateTime = 0f;
         UpdateDisplay();
     }
@@ -68,6 +72,7 @@ public class ObjectInfoDisplay : MonoBehaviour
     {
         if (placeable == null || data == null || placeable.gameObject == null)
         {
+            Debug.Log("DECONSTRUCTED");
             SetDisplay();
             return;
         }
@@ -86,7 +91,7 @@ public class ObjectInfoDisplay : MonoBehaviour
         bool isUpgradeable = data.efficiencyLevel < data.maxEfficiencyLevel;
         bool notBusy = data.buildState == BuildState.Working;
         bool isAffordable = data.efficiencyLevels[data.efficiencyLevel - 1].cost <= gameManager.cash;
-        bool isUnlocked = data.efficiencyLevels[data.efficiencyLevel - 1].researchState == ResearchState.Researchable;
+        bool isUnlocked = isUpgradeable && data.efficiencyLevels[data.efficiencyLevel].researchState == ResearchState.Researched;
 
         if (isUnlocked && isAffordable && isUpgradeable && notBusy)
         {
@@ -150,7 +155,7 @@ public class ObjectInfoDisplay : MonoBehaviour
             iconMain.sprite = data.stateSprites[0];
             iconOverlay.sprite = transparentSprite;
 
-            title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "(W BUDOWIE, " + Game.FormatTime(timeLeft) + ")";
+            title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "W BUDOWIE, " + Game.FormatTime(timeLeft);
         }
         else
         {
@@ -158,16 +163,16 @@ public class ObjectInfoDisplay : MonoBehaviour
             if (data.buildState == BuildState.Working)
             {
                 iconOverlay.sprite = transparentSprite;
-                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "(AKTYWNY)";
+                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "AKTYWNY";
             }
             else if (data.buildState == BuildState.Upgrade) {
                 iconOverlay.sprite = data.stateSprites[1]; 
-                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "(ULEPSZANIE, " + Game.FormatTime(timeLeft) + ")";
+                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "ULEPSZANIE, " + Game.FormatTime(timeLeft);
             }
             else if (data.buildState == BuildState.Demolition)
             {
                 iconOverlay.sprite = data.stateSprites[1];
-                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "(DEKONSTRUKCJA, " + Game.FormatTime(timeLeft) + ")";
+                title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "ROZBIÓRKA, " + Game.FormatTime(timeLeft);
             }
         }
         string statsText = "";
@@ -222,7 +227,7 @@ public class ObjectInfoDisplay : MonoBehaviour
         bool isUpgradeable = data.efficiencyLevel < data.maxEfficiencyLevel;
         bool isAffordable = data.efficiencyLevels[data.efficiencyLevel - 1].cost <= gameManager.cash;
         bool notBusy = data.buildState == BuildState.Working;
-        bool isUnlocked = true;
+        bool isUnlocked = isUpgradeable && data.efficiencyLevels[data.efficiencyLevel].researchState == ResearchState.Researched;
         if (!isUpgradeable || !isAffordable || !isUnlocked || !notBusy) return;
         data.buildState = BuildState.Upgrade;
         data.finishTime = Game.UnixTimeStamp() + data.efficiencyLevels[data.efficiencyLevel].timeCost;

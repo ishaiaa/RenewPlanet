@@ -35,7 +35,7 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.isCursorBusy) return;
+        if (GameManager.IsCursorBusy()) return;
         if (gameManager.isGamePaused) return;
         if (Input.GetMouseButtonDown(2))
         {

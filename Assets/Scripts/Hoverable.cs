@@ -20,37 +20,20 @@ public class Hoverable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void Start()
     {
-        Debug.Log("BRBdasdasRB");
         gameManagerObject = GameObject.Find("GameManager") ?? null;
         if (gameManagerObject == null) return;
         hoverManager = gameManagerObject.GetComponent<HoverManager>();
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        hoverManager.SetCursor(cursorMode, leftButtonInteractDisplay, leftButtonPlaceObjectDisplay, rightButtonInfoDisplay);
-        hoverManager.DisplayTooltip(objectDescription);
-        gameManagerObject.GetComponent<GameManager>().isCursorBusy = true;
-    }
-
-    public void OnMouseEnter()
-    {
-        hoverManager.SetCursor(cursorMode, leftButtonInteractDisplay, leftButtonPlaceObjectDisplay, rightButtonInfoDisplay);
-        hoverManager.DisplayTooltip(objectDescription);
-        gameManagerObject.GetComponent<GameManager>().isCursorBusy = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hoverManager.SetCursor(CursorMode.Idle);
         hoverManager.DisplayTooltip();
-        gameManagerObject.GetComponent<GameManager>().isCursorBusy = false;
     }
 
-    public void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        hoverManager.SetCursor(CursorMode.Idle);
-        hoverManager.DisplayTooltip();
-        gameManagerObject.GetComponent<GameManager>().isCursorBusy = false;
+        hoverManager.SetCursor(cursorMode, leftButtonInteractDisplay, leftButtonPlaceObjectDisplay, rightButtonInfoDisplay);
+        hoverManager.DisplayTooltip(objectDescription);
     }
 }

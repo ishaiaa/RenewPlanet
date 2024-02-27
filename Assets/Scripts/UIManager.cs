@@ -62,12 +62,19 @@ public class UIManager : MonoBehaviour
             new Vector2(90f, -105f),
             new Vector2(1000f, 0f),
             new Vector2(0f, 0f)
+        )},
+        {ShopCategory.ObjectInfo, new UIPositions(
+            new Vector2(0f,  0f),
+            new Vector2(0f, 0f),
+            new Vector2(1000f, 0f),
+            new Vector2(0f, 0f)
         )}
     };
 
     float timeDelta = 0f;
     public float animationTime;
     public ObjectInfoDisplay objectInfoDisplay;
+    public ResearchManager researchManager;
 
     public ShopCategory selectedShop = ShopCategory.None;
 
@@ -78,30 +85,31 @@ public class UIManager : MonoBehaviour
 
     void PositionTick(ShopCategory category, float dT)
     {
-        RectTransform bookmark = shopReferences[(int)category - 1].bookmark;
-        RectTransform tray = shopReferences[(int)category - 1].tray;
+        RectTransform bookmark = shopReferences[(int)category - 1].bookmark ?? null;
+        RectTransform tray = shopReferences[(int)category - 1].tray ?? null;
 
         if (category == selectedShop)
         {
-            if((Vector2) bookmark.anchoredPosition != uiElementPositions[category].bookmarkEnd) 
+            if(bookmark != null && (Vector2) bookmark.anchoredPosition != uiElementPositions[category].bookmarkEnd) 
                 bookmark.anchoredPosition = Vector2.Lerp((Vector2)bookmark.anchoredPosition, uiElementPositions[category].bookmarkEnd, dT*2);
-            if((Vector2) tray.anchoredPosition != uiElementPositions[category].shoptrayEnd)
+            if(tray != null && (Vector2) tray.anchoredPosition != uiElementPositions[category].shoptrayEnd)
                 tray.anchoredPosition = Vector2.Lerp((Vector2)tray.anchoredPosition, uiElementPositions[category].shoptrayEnd, dT);
             return;
         }
 
-        if ((Vector2)bookmark.anchoredPosition != uiElementPositions[category].bookmarkStart)
+        if (bookmark != null && (Vector2)bookmark.anchoredPosition != uiElementPositions[category].bookmarkStart)
             bookmark.anchoredPosition = Vector2.Lerp((Vector2)bookmark.anchoredPosition, uiElementPositions[category].bookmarkStart, dT*2);
 
-        if ((Vector2)tray.anchoredPosition != uiElementPositions[category].shoptrayStart)
+        if (tray != null && (Vector2)tray.anchoredPosition != uiElementPositions[category].shoptrayStart)
             tray.anchoredPosition = Vector2.Lerp((Vector2)tray.anchoredPosition, uiElementPositions[category].shoptrayStart, dT);
     }
     
     public void SelectShop(int categoryID)
     {
         ShopCategory category = (ShopCategory)categoryID;
-        if (category != ShopCategory.None) objectInfoDisplay.CloseCard();
         timeDelta = 0f;
+        if(category == ShopCategory.Infrastructure) researchManager.UpdateTopInfo();
+        if (category != ShopCategory.ObjectInfo) objectInfoDisplay.ClearDisplay();
         selectedShop = selectedShop == category ? ShopCategory.None : category;
     }
 
@@ -116,5 +124,6 @@ public class UIManager : MonoBehaviour
         PositionTick(ShopCategory.Mines, timeDelta);
         PositionTick(ShopCategory.Nature, timeDelta);
         PositionTick(ShopCategory.Infrastructure, timeDelta);
+        PositionTick(ShopCategory.ObjectInfo, timeDelta);
     }
 }

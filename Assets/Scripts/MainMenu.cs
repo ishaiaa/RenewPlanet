@@ -15,4 +15,9 @@ public class MainMenu : MonoBehaviour
         Debug.Log("QUIT");
         Application.Quit();
     }
+
+    void Start()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
 }

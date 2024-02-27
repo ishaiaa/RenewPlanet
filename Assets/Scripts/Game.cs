@@ -21,7 +21,8 @@ public enum ShopCategory
     Powerplants,
     Mines,
     Nature,
-    Infrastructure
+    Infrastructure,
+    ObjectInfo
 }
 
 public enum CollisionState

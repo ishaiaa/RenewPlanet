@@ -1,13 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {   
     public RegionManager regionManager;
-    public bool isCursorBusy = false;
+    public GameObject researchFacility;
+    public GameObject ministryFacility;
 
     public bool isGamePaused = false;
+
+    public static bool IsCursorBusy()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        foreach(RaycastResult result in results)
+        {
+            if(result.gameObject.layer == 5)
+            {
+                Debug.Log(result.gameObject.name);
+                Debug.Log(result.gameObject.transform.parent.name);
+                Debug.Log(result.gameObject.layer);
+                return true;
+            }
+            
+        }
+        return false;
+    }
 
 
     public double cash;
@@ -19,6 +41,16 @@ public class GameManager : MonoBehaviour
     public double GetCash()
     {
         return cash;
+    }
+
+    public int GetResearchCap()
+    {
+        return researchFacility.GetComponent<Placeable>().objectData.efficiencyLevel;
+    }
+
+    public int GetBuildCap()
+    {
+        return ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel;
     }
 
     public RegionData GetAllRegionData()

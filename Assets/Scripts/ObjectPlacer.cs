@@ -69,7 +69,7 @@ public class ObjectPlacer : MonoBehaviour
             return;
         }
 
-        if (!gameManager.isCursorBusy)
+        if (!GameManager.IsCursorBusy())
         {
             hoverManager.SetCursor(CursorMode.Build, false, true, false);
         }
@@ -141,6 +141,7 @@ public class ObjectPlacer : MonoBehaviour
             instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
             instantiatedObject.gameObject.layer = 6;
             instantiatedObject.gameObject.name = objectControll.objectData.name;
+            instantiatedObject.gameObject.tag = objectControll.objectData.name;
             objectControll.isPlaced = true;
             objectControll.ToggleColliderState(CollisionState.Static);
             objectControll.objectData.finishTime = Game.UnixTimeStamp()+buildTime;

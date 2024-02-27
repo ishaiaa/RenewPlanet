@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Budynek Administracyjny
+  - "O\u015Brodek Badawczy"
+  - Las
+  - Park
+  - "Elektrownia W\u0119glowa"
+  - Elektrownia Gazowa
+  - Elektrownia Atomowa
+  - Elektrownia Geotermalna
+  - Elektrownia Wiatrowa
+  - "Elektrownia S\u0142oneczna"
+  - "Kopalnia W\u0119gla"
+  - Kopalnia Uranu
+  - Rafineria Gazowa
+  - Jezioro
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,7 @@ public class PointerCollider : MonoBehaviour
         Vector3 position = referenceCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
         transform.position = new Vector3(position.x, position.y, 100f);
 
-        if (gameManager.isCursorBusy) return;
+        if (GameManager.IsCursorBusy()) return;
 
 
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
