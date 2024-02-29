@@ -34,10 +34,28 @@ public class ObjectInfoDisplay : MonoBehaviour
     public Button moveButton;
     public Button closeButton;
 
+    public GameObject funFactButtonObject;
+    public bool showFunFact = false;
+    public Sprite[] funFactButtonSprites;
 
-    void Start()
+    public void ToggleFunFact()
     {
-        uiManager.SelectShop((int)ShopCategory.None);
+        sfxManager.PlaySound(SoundEffect.Click);
+        ToggleFunFact(!showFunFact);
+    }
+
+    public void ToggleFunFact(bool state)
+    {
+        Image funFactButtonImage = funFactButtonObject.GetComponent<Image>();
+
+        int spriteId = state ? 1 : 0;
+        float opacity = state ? 1.0f : 0.4f;
+
+        showFunFact = state;
+        funFactButtonImage.sprite = funFactButtonSprites[spriteId];
+        funFactButtonImage.color = new Color(1f, 1f, 1f, opacity);
+
+        UpdateDisplay();
     }
 
     public void SetDisplay()
@@ -47,12 +65,14 @@ public class ObjectInfoDisplay : MonoBehaviour
         placeable = null;
         data = null;
         uiManager.SelectShop((int)ShopCategory.None);
+        ToggleFunFact(false);
     }
 
     public void ClearDisplay()
     {
         placeable = null;
         data = null;
+        ToggleFunFact(false);
     }
     public void SetDisplay(Placeable p)
     {
@@ -176,101 +196,115 @@ public class ObjectInfoDisplay : MonoBehaviour
                 title.text = data.efficiencyLevels[data.efficiencyLevel - 1].name + "\n" + "ROZBIÓRKA, " + Game.FormatTime(timeLeft);
             }
         }
+
         string statsText = "";
-        statsText += "STATYSTYKI:\n";
+
+        if (showFunFact) 
+        {
+            statsText += "CIEKAWOSTKI:\n";
+            statsText += "\n";
+            statsText += data.efficiencyLevels[0].funFact + "\n";
+            statsText += "\n";
+            statsText += data.efficiencyLevels[1].funFact + "\n";
+            statsText += "\n";
+            statsText += data.efficiencyLevels[2].funFact + "\n";
+        }
+        else
+        {
+            statsText += "STATYSTYKI:\n";
         
-        statsText += "\n";
-        statsText += "Aktualny poziom: " + data.efficiencyLevel + "\n";
+            statsText += "\n";
+            statsText += "Aktualny poziom: " + data.efficiencyLevel + "\n";
         
-        if(data.isRegionLimited)
-        {
-            statsText += "Można zbudowac tylko jeden element tego typu w regionie.\n";
-        }
-        if (!data.deconstructable)
-        {
-            statsText += "Tego budynku nie można zburzyć.\n";
-        }
+            if(data.isRegionLimited)
+            {
+                statsText += "Można zbudowac tylko jeden element tego typu w regionie.\n";
+            }
+            if (!data.deconstructable)
+            {
+                statsText += "Tego budynku nie można zburzyć.\n";
+            }
 
-        if(data.name == "Budynek Administracyjny")
-        {
-            statsText += "\n";
-            statsText += "Cena Energii:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + gameManager.pricePerKiloWatt[0] + "zł/kWh:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + gameManager.pricePerKiloWatt[1] + "zł/kWh:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + gameManager.pricePerKiloWatt[2] + "zł/kWh:\n";
+            if(data.name == "Budynek Administracyjny")
+            {
+                statsText += "\n";
+                statsText += "Cena Energii:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + gameManager.pricePerKiloWatt[0] + "zł/kWh:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + gameManager.pricePerKiloWatt[1] + "zł/kWh:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + gameManager.pricePerKiloWatt[2] + "zł/kWh:\n";
 
-            statsText += "\n";
-            statsText += "Maksymalna ilość prac budowlanych na jeden region:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
-        }
+                statsText += "\n";
+                statsText += "Maksymalna ilość prac budowlanych na jeden region:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
+            }
 
-        if (data.name == "Ośrodek Badawczy")
-        {
-            statsText += "\n";
-            statsText += "Maksymalna ilość badań w tym samym czasie:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
-        }
+            if (data.name == "Ośrodek Badawczy")
+            {
+                statsText += "\n";
+                statsText += "Maksymalna ilość badań w tym samym czasie:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: 1\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: 2\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: 3\n";
+            }
 
-        if (data.efficiencyLevels[data.efficiencyLevel-1].energyProduction > 0)
-        {
-            statsText += "\n";
-            statsText += "Produkcja energii:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + Game.FormatUnits(data.efficiencyLevels[0].energyProduction) + "W/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + Game.FormatUnits(data.efficiencyLevels[1].energyProduction) + "W/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + Game.FormatUnits(data.efficiencyLevels[2].energyProduction) + "W/h:\n";
-        }
+            if (data.efficiencyLevels[data.efficiencyLevel-1].energyProduction > 0)
+            {
+                statsText += "\n";
+                statsText += "Produkcja energii:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + Game.FormatUnits(data.efficiencyLevels[0].energyProduction) + "W/h:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + Game.FormatUnits(data.efficiencyLevels[1].energyProduction) + "W/h:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + Game.FormatUnits(data.efficiencyLevels[2].energyProduction) + "W/h:\n";
+            }
 
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision > 0f)
-        {
-            statsText += "\n";
-            statsText += "Emisja CO2:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + data.efficiencyLevels[0].emmision + "t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + data.efficiencyLevels[1].emmision + "t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + data.efficiencyLevels[2].emmision + "t/h:\n";
-        }
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision < 0f)
-        {
-            statsText += "\n";
-            statsText += "Redukcja CO2:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + -data.efficiencyLevels[0].emmision + "t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + -data.efficiencyLevels[1].emmision + "t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + -data.efficiencyLevels[2].emmision + "t/h:\n";
-        }
+            if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision > 0f)
+            {
+                statsText += "\n";
+                statsText += "Emisja CO2:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + data.efficiencyLevels[0].emmision + "t/h:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + data.efficiencyLevels[1].emmision + "t/h:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + data.efficiencyLevels[2].emmision + "t/h:\n";
+            }
+            if (data.efficiencyLevels[data.efficiencyLevel - 1].emmision < 0f)
+            {
+                statsText += "\n";
+                statsText += "Redukcja CO2:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + -data.efficiencyLevels[0].emmision + "t/h:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + -data.efficiencyLevels[1].emmision + "t/h:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + -data.efficiencyLevels[2].emmision + "t/h:\n";
+            }
 
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceConsumption.Length > 0)
-        {
-            ResourceProduction rP1 = data.efficiencyLevels[0].resourceConsumption[0];
-            ResourceProduction rP2 = data.efficiencyLevels[1].resourceConsumption[0];
-            ResourceProduction rP3 = data.efficiencyLevels[2].resourceConsumption[0];
+            if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceConsumption.Length > 0)
+            {
+                ResourceProduction rP1 = data.efficiencyLevels[0].resourceConsumption[0];
+                ResourceProduction rP2 = data.efficiencyLevels[1].resourceConsumption[0];
+                ResourceProduction rP3 = data.efficiencyLevels[2].resourceConsumption[0];
             
             
-            statsText += "\n";
-            statsText += "Wykorzystywany surowiec: " + ResourceList.GetNameByType(rP1.resource);
-            statsText += "\nZużycie surowca:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity+"t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity+"t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity+"t/h:\n";
+                statsText += "\n";
+                statsText += "Wykorzystywany surowiec: " + ResourceList.GetNameByType(rP1.resource);
+                statsText += "\nZużycie surowca:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity+"t/h:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity+"t/h:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity+"t/h:\n";
+            }
+
+            if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceProduction.Length > 0)
+            {
+                ResourceProduction rP1 = data.efficiencyLevels[0].resourceProduction[0];
+                ResourceProduction rP2 = data.efficiencyLevels[1].resourceProduction[0];
+                ResourceProduction rP3 = data.efficiencyLevels[2].resourceProduction[0];
+
+
+                statsText += "\n";
+                statsText += "Produkowany surowiec: " + ResourceList.GetNameByType(rP1.resource);
+                statsText += "\nProdukcja surowca:\n";
+                statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity + "t/h:\n";
+                statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity + "t/h:\n";
+                statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity + "t/h:\n";
+            }
         }
-
-        if (data.efficiencyLevels[data.efficiencyLevel - 1].resourceProduction.Length > 0)
-        {
-            ResourceProduction rP1 = data.efficiencyLevels[0].resourceProduction[0];
-            ResourceProduction rP2 = data.efficiencyLevels[1].resourceProduction[0];
-            ResourceProduction rP3 = data.efficiencyLevels[2].resourceProduction[0];
-
-
-            statsText += "\n";
-            statsText += "Produkowany surowiec: " + ResourceList.GetNameByType(rP1.resource);
-            statsText += "\nProdukcja surowca:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + rP1.quantity + "t/h:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + rP2.quantity + "t/h:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + rP3.quantity + "t/h:\n";
-        }
-
         stats.text = statsText;
     }
 
