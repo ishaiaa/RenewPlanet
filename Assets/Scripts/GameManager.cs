@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 
     public ToastManager toastManager;
 
+    public double[] pricePerKiloWatt = new double[] { 0.9, 1.0, 1.1 };
+    public double baseDailyEnergyConsumption = 900;
+    public double energyDemandIncreasePerYear = 0.5;
+
     public double minDeathsFactor = 1.000000068; //800/365/38mln
     public double maxDeathsFactor = 1.000000084; //1100/365/38mln
 
@@ -44,9 +48,6 @@ public class GameManager : MonoBehaviour
         {
             if (result.gameObject.layer == 5)
             {
-                Debug.Log(result.gameObject.name);
-                Debug.Log(result.gameObject.transform.parent.name);
-                Debug.Log(result.gameObject.layer);
                 return true;
             }
 
@@ -54,7 +55,15 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public double GetCurrentEnergyDemand()
+    {
+        return Math.Round(baseDailyEnergyConsumption + (baseDailyEnergyConsumption * (daysPassed / 365) * (energyDemandIncreasePerYear)), 2);
+    }
 
+    public double GetPricePerKilowatt()
+    {
+        return pricePerKiloWatt[ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel - 1];
+    }
 
     public double GetCash()
     {
@@ -138,6 +147,7 @@ public class GameManager : MonoBehaviour
         foreach (Placeable p in copies)
         {
             GameObject obj = p.gameObject;
+            if (!p.isPlaced) continue;
             if (region != Regions.None && obj.transform.parent.gameObject.GetComponent<RegionHover>().region != region) continue;
             if (p.objectData.buildState != BuildState.Working) continue;
 
@@ -195,6 +205,7 @@ public class GameManager : MonoBehaviour
         foreach (Placeable p in copies)
         {
             GameObject obj = p.gameObject;
+            if (!p.isPlaced) continue;
             if (region != Regions.None && obj.transform.parent.gameObject.GetComponent<RegionHover>().region != region) continue;
             if (p.objectData.buildState != BuildState.Working) continue;
 
@@ -205,11 +216,26 @@ public class GameManager : MonoBehaviour
         return new double[] { energyProduction, energyConsumption };
     }
 
+    public int GetConstructionWorkingsCount(Regions region)
+    {
+        Placeable[] copies = GameObject.FindObjectsOfType<Placeable>();
+        int count = 0;
+        
+        foreach (Placeable obj in copies)
+        {
+            if (!obj.isPlaced) continue;
+            if (obj.gameObject.transform.parent.gameObject.GetComponent<RegionHover>().region != region) continue;
+            if (obj.objectData.buildState != BuildState.Working) count++;
+        }
+        return count;
+    }
+
     public bool DoesExistInRegion(Placeable placeable, Regions region)
     {
         GameObject[] copies = GameObject.FindGameObjectsWithTag(placeable.objectData.name);
         foreach (GameObject obj in copies)
         {
+            if (!obj.GetComponent<Placeable>().isPlaced) continue;
             if (obj.transform.parent.gameObject.GetComponent<RegionHover>().region == region) return true;
         }
         return false;
@@ -231,6 +257,16 @@ public class GameManager : MonoBehaviour
             region.regionData.energyDemand = ePC[1];
 
             Placeable[] objects = region.gameObject.GetComponentsInChildren<Placeable>();
+
+            double r1 = (double)Random.Range(0.0f, 1.0f);
+            double r2 = (double)Random.Range(0.0f, 1.0f);
+
+            double births = Random.Range(0, 5);
+            double deaths = Random.Range(0, 4);
+
+
+            region.regionData.population += births - deaths;
+
             foreach (Placeable prop in objects)
             {
                 ObjectData data = prop.objectData;
@@ -258,7 +294,7 @@ public class GameManager : MonoBehaviour
                                     else
                                     {
                                         region.regionData.energyProduction -= region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        toastManager.Toast("Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
+                                        toastManager.Toast(SoundEffect.Warning, "Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
                                     }
                                     break;
                                 case (ResourceType.Uranium):
@@ -271,7 +307,7 @@ public class GameManager : MonoBehaviour
                                     else
                                     {
                                         region.regionData.energyProduction -= region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        toastManager.Toast("Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
+                                        toastManager.Toast(SoundEffect.Warning, "Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
                                     }
                                     break;
                                 case (ResourceType.Gas):
@@ -284,7 +320,7 @@ public class GameManager : MonoBehaviour
                                     else
                                     {
                                         region.regionData.energyProduction -= region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        toastManager.Toast("Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
+                                        toastManager.Toast(SoundEffect.Warning, "Jedna z elektrowni przerwa³a pracê z powodu niewystarczaj¹cej iloœci zasobów", ToastMode.Warning, 5f);
                                     }
                                     break;
                                 default:
@@ -294,9 +330,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                //
-
-                if(data.buildState != BuildState.Working)
+                if (data.buildState != BuildState.Working)
                 {
                     if(data.finishTime <= Game.UnixTimeStamp())
                     {
@@ -304,18 +338,18 @@ public class GameManager : MonoBehaviour
                         {
                             case (BuildState.Contstruction):
                                 data.buildState = BuildState.Working;
-                                toastManager.Toast("Ukoñczono budowê - " + data.efficiencyLevels[data.efficiencyLevel-1].name, ToastMode.Info, 5f);
+                                toastManager.Toast(SoundEffect.Success, "Ukoñczono budowê - " + data.efficiencyLevels[data.efficiencyLevel-1].name, ToastMode.Info, 5f);
                                 prop.UpdateVisuals();
                                 break;
                             case (BuildState.Upgrade):
                                 data.buildState = BuildState.Working;
                                 data.efficiencyLevel = Mathf.Clamp(data.efficiencyLevel + 1, 1, data.maxEfficiencyLevel);
-                                toastManager.Toast("Ulepszono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
+                                toastManager.Toast(SoundEffect.Success, "Ulepszono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
 
                                 prop.UpdateVisuals();
                                 break;
                             case (BuildState.Demolition):
-                                toastManager.Toast("Wyburzono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
+                                toastManager.Toast(SoundEffect.Success, "Wyburzono - " + data.efficiencyLevels[data.efficiencyLevel - 1].name, ToastMode.Info, 5f);
                                 Destroy(prop.gameObject);
                                 break;
                             default:
@@ -324,8 +358,25 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            region.regionData.energyStored += region.regionData.energyProduction;
-            region.regionData.energyStored -= region.regionData.energyDemand;
+            double demand = GetCurrentEnergyDemand();
+            double totalDemand = Math.Round(region.regionData.population * demand, 2);
+            region.regionData.energyDemand += totalDemand;
+
+            if(region.regionData.energyStored >= totalDemand)
+            {
+                region.regionData.energyStored -= totalDemand;
+                cash = Math.Floor(cash + ((totalDemand/1000) * GetPricePerKilowatt()));
+            }
+            else
+            {
+                double missingEnergy = totalDemand - region.regionData.energyStored;
+                double energyToSell = totalDemand - missingEnergy;
+
+                cash = Math.Floor(cash + ((energyToSell / 1000) * GetPricePerKilowatt()));
+                toastManager.Toast(SoundEffect.Warning, "Deficyt energi! Makroregion " + regionManager.regionsNames[region.region], ToastMode.Warning, 5f);
+                region.regionData.energyStored = 0;
+            }
+
         }
     }
 
@@ -333,6 +384,11 @@ public class GameManager : MonoBehaviour
     {
         DateTime currentDate = startDay.AddDays(daysPassed);
         dateDisplay.text = currentDate.ToString("dd.MM.yyyy");
+    }
+
+    public string GetUICalendar()
+    {
+        return dateDisplay.text;
     }
 
     public void Update()

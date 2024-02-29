@@ -19,5 +19,6 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
+        Time.timeScale = 1f;
     }
 }

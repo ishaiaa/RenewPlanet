@@ -6,6 +6,7 @@ public class ToastManager : MonoBehaviour
 {
     public GameObject toastTemplate;
     public GameObject toastRearranger;
+    public SFXManager sfxManager;
 
     public List<GameObject> toasts;
 
@@ -56,6 +57,22 @@ public class ToastManager : MonoBehaviour
         Toast toast = toastObject.GetComponent<Toast>();
 
         toast.InitializeToast(this, toastIndex, text, sprites[mode], duration, fadeInOutTime);
+        toasts.Add(toastObject);
+    }
+
+    public void Toast(SoundEffect soundEffect, string text, ToastMode mode = ToastMode.Info, float duration = 1f, float fadeInOutTime = 0.25f)
+    {
+        if (UpdateIfExists(text, duration)) return;
+        toastIndex++;
+        GameObject toastObject = Instantiate(toastTemplate);
+        toastObject.name = "toast-" + toastIndex;
+        toastObject.transform.SetParent(this.gameObject.transform, false);
+
+        Toast toast = toastObject.GetComponent<Toast>();
+
+        sfxManager.PlaySound(soundEffect);
+        toast.InitializeToast(this, toastIndex, text, sprites[mode], duration, fadeInOutTime);
+
         toasts.Add(toastObject);
     }
 

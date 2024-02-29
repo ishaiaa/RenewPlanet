@@ -6,6 +6,7 @@ public class ObjectPlacer : MonoBehaviour
 {
     public GameObject objectToPlace;
     public RegionManager regionManager;
+    public SFXManager sfxManager;
     public GameManager gameManager;
     public Camera referenceCamera;
     public GameObject instantiatedObject = null;
@@ -153,7 +154,14 @@ public class ObjectPlacer : MonoBehaviour
                 gameManager.toastManager.Toast("Mo¿esz umieœciæ tylko jeden taki budynek w regionie!", ToastMode.Error, 5f);
                 return;
             }
+            if (gameManager.ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel <= gameManager.GetConstructionWorkingsCount(regionManager.selectedRegion))
+            {
+                gameManager.toastManager.Toast("Osi¹gniêto maksymaln¹ iloœæ równoczesnych prac budowlanych w tym regionie!", ToastMode.Error, 5f);
+                return;
+            }
             gameManager.cash -= buildPrice;
+
+            sfxManager.PlaySound(SoundEffect.Click);
 
             instantiatedObject.transform.parent = regionManager.regionCollider.gameObject.transform;
             instantiatedObject.gameObject.layer = 6;

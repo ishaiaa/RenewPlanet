@@ -13,6 +13,7 @@ public class ShopCard : MonoBehaviour
     public Text costText;
     public Text buildTimeText;
     public GameObject lockedStateReference;
+    public SFXManager sfxManager;
     
     public GameObject gameManager;
 
@@ -21,6 +22,7 @@ public class ShopCard : MonoBehaviour
     public void ToggleLevel(int direction)
     {
         displayedLevel = Mathf.Clamp(displayedLevel + direction, 1, 3);
+        sfxManager.PlaySound(SoundEffect.Info);
         UpdateLevelDisplay();
     } 
 
@@ -75,6 +77,7 @@ public class ShopCard : MonoBehaviour
     void Start()
     {
         titleText.text = objectData.name;
+        sfxManager = gameManager.GetComponent<SFXManager>();
         UpdateLevelDisplay();
     }
 }

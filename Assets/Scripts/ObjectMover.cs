@@ -13,6 +13,7 @@ public class ObjectMover : MonoBehaviour
     public GameManager gameManager;
     public HoverManager hoverManager;
     public RegionManager regionManager;
+    public SFXManager sfxManager;
 
     List<Placeable> intersectingObjects = new List<Placeable>();
 
@@ -22,6 +23,7 @@ public class ObjectMover : MonoBehaviour
         SetOpacity(objectToMove, 0.25f);
         objectDummy = Instantiate(objectDummyTemplate);
         objectDummy.GetComponent<Placeable>().objectData = objectToMove.GetComponent<Placeable>().objectData;
+        objectDummy.GetComponent<Placeable>().isPlaced = false;
         objectDummy.GetComponent<Placeable>().UpdateVisuals();
     }
 
@@ -139,6 +141,8 @@ public class ObjectMover : MonoBehaviour
                 gameManager.toastManager.Toast("Mo¿esz umieœciæ tylko jeden taki budynek w regionie!", ToastMode.Error, 5f);
                 return;
             }
+
+            sfxManager.PlaySound(SoundEffect.Click);
 
             objectToMove.transform.position = objectDummy.transform.position;
             objectToMove.transform.parent = regionManager.regionCollider.gameObject.transform;

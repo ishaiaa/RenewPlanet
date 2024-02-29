@@ -8,6 +8,7 @@ public class ObjectInfoDisplay : MonoBehaviour
     public Placeable placeable;
     public GameManager gameManager;
     public UIManager uiManager;
+    public SFXManager sfxManager;
 
     public Sprite transparentSprite;
     
@@ -193,10 +194,10 @@ public class ObjectInfoDisplay : MonoBehaviour
         if(data.name == "Budynek Administracyjny")
         {
             statsText += "\n";
-            statsText += "Maksymalny próg emisji CO2:\n";
-            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + gameManager.emmisionTresholds[0] + "ppm:\n";
-            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + gameManager.emmisionTresholds[1] + "ppm:\n";
-            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + gameManager.emmisionTresholds[2] + "ppm:\n";
+            statsText += "Cena Energii:\n";
+            statsText += (data.efficiencyLevel == 1 ? "● " : "○ ") + "Poziom 1: " + gameManager.pricePerKiloWatt[0] + "zł/kWh:\n";
+            statsText += (data.efficiencyLevel == 2 ? "● " : "○ ") + "Poziom 2: " + gameManager.pricePerKiloWatt[1] + "zł/kWh:\n";
+            statsText += (data.efficiencyLevel == 3 ? "● " : "○ ") + "Poziom 3: " + gameManager.pricePerKiloWatt[2] + "zł/kWh:\n";
 
             statsText += "\n";
             statsText += "Maksymalna ilość prac budowlanych na jeden region:\n";
@@ -281,12 +282,41 @@ public class ObjectInfoDisplay : MonoBehaviour
         bool isAffordable = data.efficiencyLevels[data.efficiencyLevel - 1].cost <= gameManager.cash;
         bool notBusy = data.buildState == BuildState.Working;
         bool isUnlocked = isUpgradeable && data.efficiencyLevels[data.efficiencyLevel].researchState == ResearchState.Researched;
-        if (!isUpgradeable || !isAffordable || !isUnlocked || !notBusy) return;
+        bool areSpacesAviable = gameManager.ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel > gameManager.GetConstructionWorkingsCount(placeable.gameObject.transform.parent.GetComponent<RegionHover>().region);
+
+        if (!isUpgradeable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nie można ulepszyć obiektu!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!isAffordable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Niewystarczająco pieniędzy!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!notBusy)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nad obiektem trwają inne prace!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!isUnlocked)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Musisz odblokować to ulepszenie!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!areSpacesAviable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Osiągnięto limit aktywnych prac w regionie!", ToastMode.Error, 3f);
+            return;
+        }
+
+        if (!areSpacesAviable || !isUpgradeable || !isAffordable || !isUnlocked || !notBusy) return;
         data.buildState = BuildState.Upgrade;
         data.finishTime = Game.UnixTimeStamp() + data.efficiencyLevels[data.efficiencyLevel].timeCost;
         gameManager.cash -= data.efficiencyLevels[data.efficiencyLevel].cost;
         placeable.UpdateVisuals();
         UpdateDisplay();
+
     }
 
     public void DeconstructObject()
@@ -296,21 +326,51 @@ public class ObjectInfoDisplay : MonoBehaviour
         bool isDestroyable = data.deconstructable;
         bool isAffordable = data.demolitionCost <= gameManager.cash;
         bool notBusy = data.buildState == BuildState.Working;
+        bool areSpacesAviable = gameManager.ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel > gameManager.GetConstructionWorkingsCount(placeable.gameObject.transform.parent.GetComponent<RegionHover>().region);
 
-        if (!isDestroyable || !isAffordable || !notBusy) return;
+        if (!isDestroyable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Obiektu nie mozna zburzyć!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!isAffordable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Niewystarczająco pieniędzy!", ToastMode.Error, 3f);
+            return;
+        }
+        if (!notBusy)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nad obiektem trwają inne prace!", ToastMode.Error, 3f);
+            return;
+        }
+        
+        if (!areSpacesAviable)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Osiągnięto limit aktywnych prac w regionie!", ToastMode.Error, 3f);
+            return;
+        }
+
+        if (!isDestroyable || !isAffordable || !notBusy || !areSpacesAviable) return;
         
         data.buildState = BuildState.Demolition;
         data.finishTime = Game.UnixTimeStamp() + data.demolitionTime;
         gameManager.cash -= data.demolitionCost;
         placeable.UpdateVisuals();
         UpdateDisplay();
+        sfxManager.PlaySound(SoundEffect.Click);
     }
 
     public void MoveObject()
     {
         if (placeable == null) return;
+        if(placeable.objectData.buildState != BuildState.Working)
+        {
+            gameManager.toastManager.Toast(SoundEffect.Error, "Możesz przemieszczać jedynie aktywne obiekty", ToastMode.Error, 3f);
+            return;
+        }
         gameManager.gameObject.GetComponent<ObjectMover>().MoveObject(placeable.gameObject);
         SetDisplay();
+        sfxManager.PlaySound(SoundEffect.Click);
     }
 
     public void CloseCard()

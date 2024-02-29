@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class RegionData
 {
-    public int population;
+    public double population;
     public double energyStored;
     public double energyDemand;
     public double energyProduction;

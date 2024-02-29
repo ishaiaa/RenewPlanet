@@ -61,19 +61,19 @@ public class UIManager : MonoBehaviour
             new Vector2(0f,  -105f),
             new Vector2(90f, -105f),
             new Vector2(1000f, 0f),
-            new Vector2(0f, 0f)
+            new Vector2(-550f, 0f)
         )},
         {ShopCategory.ObjectInfo, new UIPositions(
             new Vector2(0f,  0f),
             new Vector2(0f, 0f),
             new Vector2(1000f, 0f),
-            new Vector2(0f, 0f)
+            new Vector2(-550f, 0f)
         )},
         {ShopCategory.RegionInfo, new UIPositions(
             new Vector2(0f,  0f),
             new Vector2(0f, 0f),
             new Vector2(1000f, 0f),
-            new Vector2(0f, 0f)
+            new Vector2(-550f, 0f)
         )}
     };
 
@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
     public ObjectInfoDisplay objectInfoDisplay;
     public RegionInfoCard regionInfoCard;
     public ResearchManager researchManager;
+    public SFXManager sfxManager;
 
     public ShopCategory selectedShop = ShopCategory.None;
 
@@ -115,7 +116,8 @@ public class UIManager : MonoBehaviour
     {
         ShopCategory category = (ShopCategory)categoryID;
         timeDelta = 0f;
-        if(category == ShopCategory.Infrastructure) researchManager.UpdateTopInfo();
+        sfxManager.PlaySound(SoundEffect.CardSwipe);
+        if (category == ShopCategory.Infrastructure) researchManager.UpdateTopInfo();
         if (category != ShopCategory.ObjectInfo) objectInfoDisplay.ClearDisplay();
         if (category != ShopCategory.RegionInfo) regionInfoCard.SetDisplayed(false);
         if (category == ShopCategory.RegionInfo) regionInfoCard.SetDisplayed(true);

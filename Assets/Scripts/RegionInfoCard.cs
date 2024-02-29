@@ -6,14 +6,25 @@ using UnityEngine.UI;
 public class RegionInfoCard : MonoBehaviour
 {
     public GameManager gameManager;
+    public SFXManager sfxManager;
     public UIManager uiManager;
     public RegionManager regionManager;
 
     public bool isDisplayed = true;
     public Regions selectedRegion;
     public Text regionName;
-    public Text cashTotal;
     float updateTick = 0f;
+
+
+    //GLOBAL STATS
+    public RegionInfoCellStructure money;
+    public RegionInfoCellStructure daysPassed;
+
+    public RegionInfoCellStructure kilowattPrice;
+    public RegionInfoCellStructure energyDemandPerPpl;
+
+    public RegionInfoCellStructure maxResearch;
+    public RegionInfoCellStructure maxBuilds;
 
     //REGION STATS
     public RegionInfoCellStructure energyProduction;
@@ -57,6 +68,8 @@ public class RegionInfoCard : MonoBehaviour
         if (current > regionManager.regionsNames.Count - 1) current = 0;
         selectedRegion = (Regions)current;
 
+        sfxManager.PlaySound(SoundEffect.Info);
+
         UpdateRegionStatsDisplay();
 
         if (selectedRegion != Regions.None)
@@ -71,11 +84,19 @@ public class RegionInfoCard : MonoBehaviour
     {
         RegionData data = gameManager.GetRegionData(selectedRegion);
         List<ResourceProduction[]> rPD = gameManager.GetResourceStatsInRegion(selectedRegion);
-        double[] energyProdConsumpt = gameManager.GetEnergyBalanceInRegion(selectedRegion);
-        cashTotal.text = "Pieniądze: "+Game.FormatCash(gameManager.cash);
 
-        energyProduction.infoCell.UpdateText("Produkcja Energii", Game.FormatUnits(energyProdConsumpt[0]) + "W/dzień");
-        energyConsumption.infoCell.UpdateText("Zużycie Energii", Game.FormatUnits(energyProdConsumpt[1]) + "W/dzień");
+
+        money.infoCell              .UpdateText("Pieniądze", Game.FormatCash(gameManager.cash));
+        daysPassed.infoCell         .UpdateText("Obecna Data", gameManager.GetUICalendar());
+
+        kilowattPrice.infoCell      .UpdateText("Cena energii", gameManager.GetPricePerKilowatt()+"zł/kW");
+        energyDemandPerPpl.infoCell .UpdateText("Zużycie energii na mieszkańca", Game.FormatUnits(gameManager.GetCurrentEnergyDemand())+"W/dzień");
+
+        maxResearch.infoCell        .UpdateText("Limit badań", gameManager.researchFacility.GetComponent<Placeable>().objectData.efficiencyLevel + " równocześnie");
+        maxBuilds.infoCell          .UpdateText("Limit prac budowlanych", gameManager.ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel + " równocześnie");
+
+        energyProduction.infoCell.UpdateText("Produkcja Energii", Game.FormatUnits(data.energyProduction) + "W/dzień");
+        energyConsumption.infoCell.UpdateText("Zużycie Energii", Game.FormatUnits(data.energyDemand) + "W/dzień");
         energyStorage.infoCell.UpdateText("Zgromadzona Energia", Game.FormatUnits(data.energyStored));
 
         population.infoCell.UpdateText("Populacja Regionu", Game.FormatCash(data.population));
@@ -102,6 +123,17 @@ public class RegionInfoCard : MonoBehaviour
         {
             regionName.text = "Cały Kraj";
         }
+
+
+        money.infoCell              .UpdateAll(money.icon, "-", "-");
+        daysPassed.infoCell         .UpdateAll(daysPassed.icon, "-", "-");
+                                                
+        kilowattPrice.infoCell      .UpdateAll(kilowattPrice.icon, "-", "-");
+        energyDemandPerPpl.infoCell .UpdateAll(energyDemandPerPpl.icon, "-", "-");
+                                                
+        maxResearch.infoCell        .UpdateAll(maxResearch.icon, "-", "-");
+        maxBuilds.infoCell          .UpdateAll(maxBuilds.icon, "-", "-");
+
 
         energyProduction.infoCell.UpdateAll(energyProduction.icon, "-", "-");
         energyConsumption.infoCell.UpdateAll(energyConsumption.icon, "-", "-");
@@ -130,7 +162,7 @@ public class RegionInfoCard : MonoBehaviour
     {
         if (!isDisplayed) return;
         updateTick += Time.deltaTime;
-        if (updateTick < 1f) return;
+        if (updateTick < 0.25f) return;
         UpdateRegionStatsDisplay();
         updateTick = 0f;
     }

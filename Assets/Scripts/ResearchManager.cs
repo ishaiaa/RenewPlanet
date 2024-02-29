@@ -52,20 +52,21 @@ public class ResearchManager : MonoBehaviour
         if (selectedCard == null) return;
         if (selectedCard.efficiencyLevel.researchState != ResearchState.Researchable)
         {
-            gameManager.toastManager.Toast("Nie mo¿esz przeprowadziæ badañ nad t¹ technologi¹!", ToastMode.Error, 5f);
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nie mo¿esz przeprowadziæ badañ nad t¹ technologi¹!", ToastMode.Error, 5f);
             return;
         }
         if (gameManager.GetResearchCap() <= ongoingResearch.Count) 
         {
-            gameManager.toastManager.Toast("Nie mo¿esz prowadziæ wiêcej badañ równoczeœnie!", ToastMode.Error, 5f);
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nie mo¿esz prowadziæ wiêcej badañ równoczeœnie!", ToastMode.Error, 5f);
             return;
         }
         if (gameManager.cash < selectedCard.efficiencyLevel.researchCost)
         {
-            gameManager.toastManager.Toast("Nie masz wystarczaj¹cej iloœci pieniêdzy!", ToastMode.Error, 5f);
+            gameManager.toastManager.Toast(SoundEffect.Error, "Nie masz wystarczaj¹cej iloœci pieniêdzy!", ToastMode.Error, 5f);
             return;
         }
 
+        gameManager.toastManager.Toast(SoundEffect.Click, "Rozpoczêto nowe badania", ToastMode.Info, 5f);
         selectedCard.efficiencyLevel.researchState = ResearchState.Researching;
         selectedCard.efficiencyLevel.researchFinishTime = Game.UnixTimeStamp() + selectedCard.efficiencyLevel.researchTime;
         gameManager.cash -= selectedCard.efficiencyLevel.researchCost;
@@ -89,7 +90,11 @@ public class ResearchManager : MonoBehaviour
         }
         infoIcon.sprite = rC.effLevelSprites[rC.efficiencyLevel.level - 1];
         infoTitle.text = rC.efficiencyLevel.name;
-        infoDescription.text = "TO DO"; //TO DO
+
+
+        string statsText = rC.efficiencyLevel.funFact;
+
+        infoDescription.text = statsText;
 
         UpdateTopInfo();
 
@@ -205,7 +210,8 @@ public class ResearchManager : MonoBehaviour
                 researchCardsReferences[GetIndexInList(rCard) + 1].efficiencyLevel.researchState = ResearchState.Researchable;
                 researchCardsReferences[GetIndexInList(rCard) + 1].UpdateVisuals();
             }
-            gameManager.toastManager.Toast("Ukoñczono Badania - " +rCard.efficiencyLevel.name, ToastMode.Info, 5f);
+            gameManager.toastManager.Toast(SoundEffect.Success, "Ukoñczono Badania - " +rCard.efficiencyLevel.name, ToastMode.Info, 5f);
+
 
             UpdateCorrespondingShopCard(rCard);
             UpdateWorld(rCard);
