@@ -68,12 +68,19 @@ public class UIManager : MonoBehaviour
             new Vector2(0f, 0f),
             new Vector2(1000f, 0f),
             new Vector2(0f, 0f)
+        )},
+        {ShopCategory.RegionInfo, new UIPositions(
+            new Vector2(0f,  0f),
+            new Vector2(0f, 0f),
+            new Vector2(1000f, 0f),
+            new Vector2(0f, 0f)
         )}
     };
 
     float timeDelta = 0f;
     public float animationTime;
     public ObjectInfoDisplay objectInfoDisplay;
+    public RegionInfoCard regionInfoCard;
     public ResearchManager researchManager;
 
     public ShopCategory selectedShop = ShopCategory.None;
@@ -110,6 +117,8 @@ public class UIManager : MonoBehaviour
         timeDelta = 0f;
         if(category == ShopCategory.Infrastructure) researchManager.UpdateTopInfo();
         if (category != ShopCategory.ObjectInfo) objectInfoDisplay.ClearDisplay();
+        if (category != ShopCategory.RegionInfo) regionInfoCard.SetDisplayed(false);
+        if (category == ShopCategory.RegionInfo) regionInfoCard.SetDisplayed(true);
         selectedShop = selectedShop == category ? ShopCategory.None : category;
     }
 
@@ -125,5 +134,6 @@ public class UIManager : MonoBehaviour
         PositionTick(ShopCategory.Nature, timeDelta);
         PositionTick(ShopCategory.Infrastructure, timeDelta);
         PositionTick(ShopCategory.ObjectInfo, timeDelta);
+        PositionTick(ShopCategory.RegionInfo, timeDelta);
     }
 }

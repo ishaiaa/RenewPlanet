@@ -22,7 +22,8 @@ public enum ShopCategory
     Mines,
     Nature,
     Infrastructure,
-    ObjectInfo
+    ObjectInfo,
+    RegionInfo
 }
 
 public enum CollisionState
@@ -126,6 +127,13 @@ public static class Game
             return (watts / 1000).ToString("F2") + "k";
         return watts.ToString("F2");
     }
+
+    public static double DLerp(double a, double b, double t)
+    {
+        if (t > 1) t = 1;
+        if (t < 0) t = 0;
+        return a + (b - a) * t;
+    }
 }
 
 [Serializable]
@@ -149,7 +157,6 @@ public class ObjectData
     public BuildState buildState;
     public Sprite[] stateSprites; //states for building/upgrading/demolition
     public double finishTime;      //timestamp for when the build will be finished
-
 
 
     //deconstruction
@@ -223,6 +230,13 @@ public class EfficiencyLevel
     public ResourceProduction[] resourceConsumption; //consumed resources
 
     public EfficiencyLevel() { }
+}
+
+[Serializable]
+public class RegionInfoCellStructure
+{
+    public RegionInfoCell infoCell;
+    public Sprite icon;
 }
 
 [Serializable]
