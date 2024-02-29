@@ -17206,6 +17206,7 @@ MonoBehaviour:
   costText: {fileID: 696491232}
   buildTimeText: {fileID: 1257960181}
   lockedStateReference: {fileID: 293396439}
+  sfxManager: {fileID: 0}
   gameManager: {fileID: 1480427637}
   displayedLevel: 1
 --- !u!1 &749570551
@@ -22022,6 +22023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toastTemplate: {fileID: 8307734849262511812, guid: 55398b2bd0d851644abc2b475665b17a, type: 3}
   toastRearranger: {fileID: 0}
+  sfxManager: {fileID: 0}
   toasts: []
   infoIcon: {fileID: 21300000, guid: fca75068cd0c0c2409f319187f89d5d3, type: 3}
   warningIcon: {fileID: 21300000, guid: 7632c3d081598fc4cae78d04c650de0f, type: 3}
@@ -24010,6 +24012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toastTemplate: {fileID: 8307734849262511812, guid: 55398b2bd0d851644abc2b475665b17a, type: 3}
   toastRearranger: {fileID: 948826125}
+  sfxManager: {fileID: 1480427644}
   toasts: []
   infoIcon: {fileID: 21300000, guid: fca75068cd0c0c2409f319187f89d5d3, type: 3}
   warningIcon: {fileID: 21300000, guid: 7632c3d081598fc4cae78d04c650de0f, type: 3}
@@ -24997,6 +25000,7 @@ MonoBehaviour:
   placeable: {fileID: 0}
   gameManager: {fileID: 1480427641}
   uiManager: {fileID: 143882393}
+  sfxManager: {fileID: 0}
   transparentSprite: {fileID: 21300000, guid: 175e40ae6f5ffe84e9e917f47fc841ed, type: 3}
   iconMain: {fileID: 0}
   iconOverlay: {fileID: 0}
@@ -34293,6 +34297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPlace: {fileID: 936850913047374144, guid: 0357132bab6a66f4db186de22f236020, type: 3}
   regionManager: {fileID: 1480427638}
+  sfxManager: {fileID: 1480427644}
   gameManager: {fileID: 1480427641}
   referenceCamera: {fileID: 1976906864}
   instantiatedObject: {fileID: 0}
@@ -34379,6 +34384,7 @@ MonoBehaviour:
   gameManager: {fileID: 1480427641}
   hoverManager: {fileID: 1480427642}
   regionManager: {fileID: 1480427638}
+  sfxManager: {fileID: 1480427644}
 --- !u!114 &1480427644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36277,6 +36283,7 @@ MonoBehaviour:
   costText: {fileID: 120830334}
   buildTimeText: {fileID: 1984459848}
   lockedStateReference: {fileID: 498427341}
+  sfxManager: {fileID: 0}
   gameManager: {fileID: 1480427637}
   displayedLevel: 1
 --- !u!114 &1528366553
@@ -36650,6 +36657,7 @@ MonoBehaviour:
   placeable: {fileID: 0}
   gameManager: {fileID: 1480427641}
   uiManager: {fileID: 143882393}
+  sfxManager: {fileID: 1480427644}
   transparentSprite: {fileID: 21300000, guid: 175e40ae6f5ffe84e9e917f47fc841ed, type: 3}
   iconMain: {fileID: 1650710616}
   iconOverlay: {fileID: 1668513898}
@@ -38669,6 +38677,7 @@ MonoBehaviour:
   costText: {fileID: 1421560933}
   buildTimeText: {fileID: 1982196684}
   lockedStateReference: {fileID: 932522640}
+  sfxManager: {fileID: 0}
   gameManager: {fileID: 1480427637}
   displayedLevel: 1
 --- !u!224 &1632828539
@@ -44182,6 +44191,7 @@ MonoBehaviour:
   costText: {fileID: 135851127}
   buildTimeText: {fileID: 1534120339}
   lockedStateReference: {fileID: 1726724338}
+  sfxManager: {fileID: 0}
   gameManager: {fileID: 1480427637}
   displayedLevel: 1
 --- !u!114 &1811120704
@@ -50117,6 +50127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1480427641}
+  sfxManager: {fileID: 1480427644}
   uiManager: {fileID: 143882393}
   regionManager: {fileID: 1480427638}
   isDisplayed: 0
