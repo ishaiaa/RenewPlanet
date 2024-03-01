@@ -308,7 +308,10 @@ MonoBehaviour:
       timeCost: 300
       name: "Ma\u0142a Elektrownia Gazowa"
       description: "Kompaktowa instalacja wykorzystuj\u0105ca gaz do produkcji energii"
-      funFact: 
+      funFact: "Pierwsza elektrownia gazowa zosta\u0142a uruchomiona w roku 1820
+        przez Birminghams Gas Light and Coke Company w Wielkiej Brytanii. Wykorzystywa\u0142a
+        ona gaz koksowy do zasilania silnik\xF3w parowych, generuj\u0105cych pr\u0105d
+        elektryczny"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -328,7 +331,10 @@ MonoBehaviour:
       name: "\u015Arednia Elektrownia Gazowa"
       description: "Efektywna jednostka energetyczna \u015Bredniej wielko\u015Bci,
         wykorzystuj\u0105ca gaz z elastyczno\u015Bci\u0105"
-      funFact: 
+      funFact: "W latach 30. XX wieku wprowadzenie turbin gazowych znacznie zwi\u0119kszy\u0142o
+        sprawno\u015B\u0107 elektrowni gazowych. To zaawansowane urz\u0105dzenie
+        przekszta\u0142ca energi\u0119 gaz\xF3w spalinowych w energi\u0119 mechaniczn\u0105,
+        nap\u0119dzaj\u0105c generator elektryczny"
       researchState: 1
       researchCost: 1500000000
       researchTime: 300
@@ -349,7 +355,9 @@ MonoBehaviour:
       description: "Pot\u0119\u017Cna instalacja generuj\u0105ca du\u017Ce ilo\u015Bci
         energii elektrycznej z u\u017Cyciem gazu, charakteryzuj\u0105ca si\u0119
         wysok\u0105 efektywno\u015Bci\u0105"
-      funFact: 
+      funFact: "W dzisiejszych czasach rozwijane s\u0105 technologie wychwytywania
+        i sk\u0142adowania dwutlenku w\u0119gla (CCS), kt\xF3re maj\u0105 na celu
+        dalsze ograniczanie emisji gaz\xF3w cieplarnianych przez elektrownie gazowe"
       researchState: 0
       researchCost: 3000000000
       researchTime: 600
@@ -8697,7 +8705,10 @@ MonoBehaviour:
       timeCost: 150
       name: "Ma\u0142a Rafineria Gazowa"
       description: "Skromna instalacja przetwarzaj\u0105ca gaz naturalny"
-      funFact: 
+      funFact: "Rafinerie gazowe s\u0105 jednymi z najbardziej z\u0142o\u017Conych
+        instalacji przemys\u0142owych na \u015Bwiecie. Procesy te obejmuj\u0105 destylacj\u0119
+        frakcyjn\u0105, konwersj\u0119 chemiczn\u0105 i r\xF3\u017Cne operacje jednostkowe,
+        maj\u0105ce na celu uzyskanie r\xF3\u017Cnych produkt\xF3w"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -8717,7 +8728,11 @@ MonoBehaviour:
       name: "\u015Arednia Rafineria Gazowa"
       description: "Efektywna rafineria gazowa o umiarkowanej skali, specjalizuj\u0105ca
         si\u0119 w przetwarzaniu gazu ziemnego"
-      funFact: 
+      funFact: "W 2019 roku otwarto pierwsz\u0105 na \u015Bwiecie platform\u0119
+        wiertnicz\u0105, kt\xF3ra dzia\u0142a wy\u0142\u0105cznie na energi\u0119
+        z odnawialnych \u017Ar\xF3de\u0142, a konkretnie ze stacji s\u0142onecznej.
+        To znak, \u017Ce rafinerie eksploruj\u0105 zr\xF3wnowa\u017Cone \u017Ar\xF3d\u0142a
+        energii"
       researchState: 1
       researchCost: 150000000
       researchTime: 450
@@ -8737,7 +8752,9 @@ MonoBehaviour:
       name: "Du\u017Ca Rafineria Gazowa"
       description: "Pot\u0119\u017Cna instalacja przetwarzaj\u0105ca znaczne ilo\u015Bci
         gazu naturalnego"
-      funFact: 
+      funFact: "Rafinerie gazowe inwestuj\u0105 w nowoczesne technologie, takie jak
+        technologia katalizator\xF3w, aby zoptymalizowa\u0107 procesy produkcji i
+        zmniejszy\u0107 emisje zanieczyszcze\u0144"
       researchState: 0
       researchCost: 250000000
       researchTime: 900
@@ -15753,7 +15770,10 @@ MonoBehaviour:
       timeCost: 60
       name: "Ma\u0142y Park"
       description: "Przytulna przestrze\u0144 do odpoczynku"
-      funFact: 
+      funFact: "Tradycja zak\u0142adania park\xF3w miejskich si\u0119ga staro\u017Cytnego
+        Rzymu. W I wieku p.n.e. Juliusz Cezar wprowadzi\u0142 pierwsze publiczne
+        ogrody miejskie, kt\xF3re s\u0142u\u017Cy\u0142y jako miejsce rekreacji i
+        wypoczynku dla mieszka\u0144c\xF3w"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -15770,7 +15790,11 @@ MonoBehaviour:
       timeCost: 90
       name: "\u015Aredni Park"
       description: "Spory obszar, doskona\u0142y do prowadzenia aktywno\u015Bci fizycznych"
-      funFact: 
+      funFact: "W epoce industrializmu parki miejskie by\u0142y kluczowe dla zdrowia
+        publicznego, zapewniaj\u0105c mieszka\u0144com miejskich obszar\xF3w przestrze\u0144
+        na wypoczynek i kontakt z natur\u0105. Wielu architekt\xF3w krajobrazu w
+        tym okresie podkre\u015Bla\u0142o korzy\u015Bci psychologiczne wynikaj\u0105ce
+        z pobytu w\u015Br\xF3d zieleni"
       researchState: 1
       researchCost: 3000000
       researchTime: 90
@@ -15787,7 +15811,11 @@ MonoBehaviour:
       timeCost: 120
       name: "Du\u017Cy Park"
       description: "Kompleksowa przestrze\u0144 rekreacyjna z licznymi alejkami"
-      funFact: 
+      funFact: "W niekt\xF3rych nowoczesnych parkach miejskich zastosowano inteligentne
+        kosze na \u015Bmieci, wyposa\u017Cone w sensory, kt\xF3re informuj\u0105
+        o poziomie zape\u0142nienia. To pozwala na efektywne zarz\u0105dzanie gospodark\u0105
+        odpadami, optymalizacj\u0119 tras odbioru i redukcj\u0119 emisji zwi\u0105zan\u0105
+        z niepotrzebnymi podr\xF3\u017Cami \u015Bmieciarek"
       researchState: 0
       researchCost: 5000000
       researchTime: 120
@@ -20933,7 +20961,11 @@ MonoBehaviour:
       name: "M\u0142ody Las"
       description: "Drzewa s\u0105 jeszcze m\u0142ode, a las jest rzadki, ale to
         zawsze jaki\u015B pocz\u0105tek"
-      funFact: 
+      funFact: "Lasy odgrywaj\u0105 kluczow\u0105 rol\u0119 w bilansie dwutlenku
+        w\u0119gla. Proces fotosyntezy, w trakcie kt\xF3rego drzewa absorbuj\u0105
+        dwutlenek w\u0119gla i uwalniaj\u0105 tlen, stanowi istotny mechanizm reguluj\u0105cy
+        ilo\u015B\u0107 tego gaz\xF3w cieplarnianego w atmosferze. Badania nad globalnym
+        wp\u0142ywem las\xF3w na klimat s\u0105 nieustannie prowadzone"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -20951,7 +20983,11 @@ MonoBehaviour:
       name: "\u015Aredni Las"
       description: "Drzewa s\u0105 ju\u017C wysokie, ale las nie jest jeszcze szczeg\xF3lnie
         g\u0119sty"
-      funFact: 
+      funFact: "W ramach nowoczesnych bada\u0144 ekologicznych wprowadza si\u0119
+        projekty monitorowania las\xF3w w czasie rzeczywistym za pomoc\u0105 satelit\xF3w.
+        To umo\u017Cliwia szybkie reagowanie na po\u017Cary, wylesianie czy inne
+        zagro\u017Cenia \u015Brodowiska. Dane zbierane z kosmosu pomagaj\u0105 zrozumie\u0107
+        trendy w zmianach le\u015Bnych na skal\u0119 globaln\u0105"
       researchState: 1
       researchCost: 5000000
       researchTime: 90
@@ -20969,7 +21005,10 @@ MonoBehaviour:
       name: "Du\u017Cy Las"
       description: "Drzewa s\u0105 wysokie, a las jest wystarczaj\u0105co g\u0119sty,
         by zapewni\u0107 os\u0142on\u0119 przed s\u0142o\u0144cem"
-      funFact: 
+      funFact: "Dendrochronologia, czyli nauka o badaniu wieku drzew, sta\u0142a
+        si\u0119 bardziej precyzyjna dzi\u0119ki zaawansowanym technologiom. Naukowcy
+        wykorzystuj\u0105 skanery laserowe do dok\u0142adnego okre\u015Blania wieku
+        drzew na podstawie rocznych pier\u015Bcieni wzrostu."
       researchState: 0
       researchCost: 7000000
       researchTime: 120
@@ -21324,7 +21363,9 @@ MonoBehaviour:
       timeCost: 420
       name: "Ma\u0142a Kopalnia Uranu"
       description: "Skromna kopalnia wydobywaj\u0105ca niewielkie ilo\u015Bci uranu"
-      funFact: 
+      funFact: "W Polsce zasoby uranu s\u0105 stosunkowo niewielkie w por\xF3wnaniu
+        do innych kraj\xF3w. Jednak najwi\u0119cej zasob\xF3w uranu stwierdzono w
+        Sudetach, g\u0142\xF3wnie w rejonie Kowar i Kletna"
       researchState: 1
       researchCost: 2000000000
       researchTime: 360
@@ -21344,7 +21385,9 @@ MonoBehaviour:
       name: "\u015Arednia Kopalnia Uranu"
       description: "Efektywna kopalnia uranu o umiarkowanej skali, dostarczaj\u0105ca
         istotne ilo\u015Bci surowca dla reaktor\xF3w j\u0105drowych"
-      funFact: 
+      funFact: "Kazachstan jest jednym z g\u0142\xF3wnych producent\xF3w uranu na
+        \u015Bwiecie. Kopalnia Inkai i Kopalnia Centralna w Kazachstanie posiadaj\u0105
+        ogromne rezerwy tego surowca"
       researchState: 0
       researchCost: 4000000000
       researchTime: 420
@@ -21364,7 +21407,10 @@ MonoBehaviour:
       name: "Du\u017Ca Kopalnia Uranu"
       description: "Pot\u0119\u017Cna instalacja wydobywaj\u0105ca du\u017Ce ilo\u015Bci
         uranu na skal\u0119 przemys\u0142ow\u0105"
-      funFact: 
+      funFact: "W ostatnich latach pojawi\u0142y si\u0119 innowacje w technologii
+        wydobycia uranu, takie jak zastosowanie nanotechnologii czy nowoczesne metody
+        geofizyczne, kt\xF3re maj\u0105 na celu zwi\u0119kszenie wydajno\u015Bci
+        i redukcj\u0119 wp\u0142ywu na \u015Brodowisko. "
       researchState: 0
       researchCost: 6000000000
       researchTime: 720
@@ -25196,7 +25242,11 @@ MonoBehaviour:
       timeCost: 60
       name: "Ma\u0142e Jezioro"
       description: Niewielki zbiornik wodny
-      funFact: 
+      funFact: "Ro\u015Blinno\u015B\u0107 przybrze\u017Cna, zw\u0142aszcza trzcina,
+        kosodrzewina i inne ro\u015Bliny obszar\xF3w nadbrze\u017Cnych, pe\u0142ni\u0105
+        kluczow\u0105 rol\u0119 w poch\u0142anianiu dwutlenku w\u0119gla (CO2) z
+        atmosfery. Ich zdolno\u015B\u0107 do fotosyntezy przyczynia si\u0119 do redukcji
+        ilo\u015Bci tego gaz\xF3w cieplarnianego"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -25214,7 +25264,11 @@ MonoBehaviour:
       name: "\u015Arednie Jezioro"
       description: "Zbiornik \u015Bredniej wielko\u015Bci, doskona\u0142a przestrze\u0144
         wypoczynkowa"
-      funFact: 
+      funFact: "Wynalazki zwi\u0105zane z energi\u0105 obejmuj\u0105 hybrydowe systemy
+        energetyczne wykorzystuj\u0105ce energi\u0119 s\u0142oneczn\u0105, wiatrow\u0105
+        i wodn\u0105 do zasilania obszar\xF3w jeziornych. To ekologiczne podej\u015Bcie
+        zmniejsza wp\u0142yw na \u015Brodowisko i wspiera zr\xF3wnowa\u017Cony rozw\xF3j
+        tych obszar\xF3w"
       researchState: 1
       researchCost: 3000000
       researchTime: 90
@@ -25232,7 +25286,10 @@ MonoBehaviour:
       name: "Du\u017Ce Jezioro"
       description: "Spory zbiornik wodny, idealna przestrze\u0144 rekreacyjna i ostoja
         natury"
-      funFact: 
+      funFact: "Wynalazki skoncentrowane na ochronie jezior obejmuj\u0105 technologie
+        do usuwania zanieczyszcze\u0144. Filtry z nanorurkami w\u0119glowymi czy
+        systemy oczyszczania oparte na algach to przyk\u0142ady innowacyjnych rozwi\u0105za\u0144
+        maj\u0105cych na celu popraw\u0119 jako\u015Bci w\xF3d jeziornych"
       researchState: 0
       researchCost: 5000000
       researchTime: 120
@@ -29830,7 +29887,10 @@ MonoBehaviour:
       name: "Ma\u0142a Elektrownia Atomowa"
       description: "Kompaktowy reaktor j\u0105drowy dostarczaj\u0105cy umiarkowane
         ilo\u015Bci energii"
-      funFact: 
+      funFact: "Pierwsza elektrownia atomowa do produkcji energii elektrycznej zosta\u0142a
+        otwarta w Obninsku w Zwi\u0105zku Radzieckim w 1954 roku. W USA, pierwsza
+        elektrownia atomowa dla cel\xF3w komercyjnych, Shippingport, uruchomiona
+        zosta\u0142a w 1958 roku"
       researchState: 1
       researchCost: 20000000000
       researchTime: 450
@@ -29850,7 +29910,11 @@ MonoBehaviour:
       name: "\u015Arednia Elektrownia Atomowa"
       description: "Efektywna jednostka j\u0105drowa o umiarkowanej skali, dostarczaj\u0105ca
         znacz\u0105c\u0105 ilo\u015B\u0107 energii elektrycznej"
-      funFact: 
+      funFact: "Elektrownie atomowe opieraj\u0105 si\u0119 na zjawisku rozszczepienia
+        j\u0105der atomowych, kt\xF3re uwalniaj\u0105 ogromn\u0105 ilo\u015B\u0107
+        energii w postaci ciep\u0142a. To ciep\u0142o jest nast\u0119pnie wykorzystywane
+        do produkcji pary, nap\u0119dzaj\u0105cej turbiny generuj\u0105ce pr\u0105d
+        elektryczny"
       researchState: 0
       researchCost: 50000000000
       researchTime: 600
@@ -29870,7 +29934,9 @@ MonoBehaviour:
       name: "Du\u017Ca Elektrownia Atomowa"
       description: "Pot\u0119\u017Cna instalacja generuj\u0105ca du\u017C\u0105 ilo\u015B\u0107
         pr\u0105du elektrycznego z u\u017Cyciem energii j\u0105drowej"
-      funFact: 
+      funFact: "G\u0142\xF3wnym wyzwaniem ekologicznym zwi\u0105zanym z elektrowniami
+        atomowymi s\u0105 odpady radioaktywne. Rozw\xF3j bezpiecznych metod sk\u0142adowania
+        i utylizacji odpad\xF3w jest przedmiotem intensywnych bada\u0144"
       researchState: 0
       researchCost: 7000000000
       researchTime: 750
@@ -42125,7 +42191,10 @@ MonoBehaviour:
       name: Biuro Koordynacyjne
       description: "Zajmuje si\u0119 podstawowymi funkcjami administracyjnymi, koordynuj\u0105c
         dzia\u0142ania r\xF3\u017Cnych resort\xF3w"
-      funFact: 
+      funFact: "W 2015 roku Porozumienie Paryskie, podpisane przez wi\u0119kszo\u015B\u0107
+        pa\u0144stw \u015Bwiata, okre\u015Bli\u0142o globalne cele w zakresie ograniczenia
+        wzrostu temperatury na Ziemi. Jest to jedno z najwa\u017Cniejszych porozumie\u0144
+        dotycz\u0105cych zmian klimatycznych"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -42143,7 +42212,10 @@ MonoBehaviour:
       name: Sekretariat Administracyjny
       description: "pe\u0142ni rol\u0119 centralnego punktu zarz\u0105dzania administracj\u0105
         rz\u0105dow\u0105, obs\u0142uguj\u0105c bardziej zaawansowane procesy"
-      funFact: 
+      funFact: "Staro\u017Cytni Egipcjanie ustanowili jedn\u0105 z najwcze\u015Bniejszych
+        form administracji pa\u0144stwowej. Ju\u017C oko\u0142o 3000 lat p.n.e. w\u0142adcy
+        egipscy zatrudniali urz\u0119dnik\xF3w, aby zarz\u0105dzali skarbcami, prowadzili
+        spisy ludno\u015Bci, czy nadzorowali prace budowlane"
       researchState: 1
       researchCost: 5000000
       researchTime: 300
@@ -42161,7 +42233,10 @@ MonoBehaviour:
       name: "Centrum Zarz\u0105dzania Rz\u0105dowego"
       description: "Najwy\u017Cszy szczebl administracyjny, koordynuj\u0105cy kompleksowe
         strategie i decyzje rz\u0105dowe"
-      funFact: 
+      funFact: "W 1997 roku przyj\u0119to Protok\xF3\u0142 z Kioto, pierwsze mi\u0119dzynarodowe
+        porozumienie maj\u0105ce na celu kontrol\u0119 emisji gaz\xF3w cieplarnianych.
+        To porozumienie wprowadzi\u0142o konkretne cele dla kraj\xF3w rozwini\u0119tych
+        w zakresie redukcji emisji"
       researchState: 0
       researchCost: 10000000
       researchTime: 420
@@ -44940,7 +45015,8 @@ MonoBehaviour:
       name: "Ma\u0142a Kopalnia W\u0119gla"
       description: "Nowo powsta\u0142a kopalnia, wydobywa oraniczone ilo\u015Bci
         w\u0119gla"
-      funFact: 
+      funFact: "Kopalnie w Be\u0142chatowie wydobywa rocznie oko\u0142o 33 mln ton
+        w\u0119gla brunatnego"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -44959,7 +45035,8 @@ MonoBehaviour:
       timeCost: 450
       name: "\u015Arednia Kopalnia W\u0119gla"
       description: "Kopalnia wydobywa umiarkowane ilo\u015Bci w\u0119gla."
-      funFact: 
+      funFact: "Najwi\u0119ksze rezerwy w\u0119gla brunatnego posiada Rosja 91 mld
+        ton, za ni\u0105 jest Australia 44 mld ton i Niemcy 40 mld ton"
       researchState: 1
       researchCost: 100000000
       researchTime: 450
@@ -44978,7 +45055,9 @@ MonoBehaviour:
       timeCost: 900
       name: "Du\u017Ca Kopalnia W\u0119gla"
       description: "Kopalnia wydobywa ogromne ilo\u015Bci w\u0119gla"
-      funFact: 
+      funFact: "W kopalniach w\u0119gla cz\u0119sto wyst\u0119puje problem gaz\xF3w,
+        zw\u0142aszcza metanu. Historia g\xF3rnictwa zapisuje wiele tragicznych wybuch\xF3w
+        metanu, kt\xF3re wp\u0142yn\u0119\u0142y na popraw\u0119 technologii bezpiecze\u0144stwa"
       researchState: 0
       researchCost: 200000000
       researchTime: 900
@@ -49428,7 +49507,10 @@ MonoBehaviour:
       timeCost: 0
       name: "Ma\u0142y O\u015Brodek Badawczy"
       description: "Ograniczony personel, wyposa\u017Cenie i miejsce"
-      funFact: 
+      funFact: "W latach 80. XIX wieku, Thomas Edison za\u0142o\u017Cy\u0142 Edison
+        Electric Light Company, jedno z pierwszych o\u015Brodk\xF3w badawczych nad
+        zastosowaniami elektryczno\u015Bci. Jego prace mia\u0142y wp\u0142yw na rozw\xF3j
+        system\xF3w o\u015Bwietleniowych i przemys\u0142u elektrotechnicznego"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -49445,7 +49527,10 @@ MonoBehaviour:
       timeCost: 600
       name: "\u015Aredni O\u015Brodek Badawczy"
       description: "Umiarkowana ilo\u015Bc personelu i miejsca na badania"
-      funFact: 
+      funFact: "W ostatnich dziesi\u0119cioleciach o\u015Brodki badawcze na ca\u0142ym
+        \u015Bwiecie skupi\u0142y si\u0119 na badaniach nad energi\u0105 odnawialn\u0105.
+        Badania te obejmuj\u0105 rozw\xF3j efektywnych technologii solarnych, wiatrowych,
+        geotermalnych i hybrydowych"
       researchState: 1
       researchCost: 5000000
       researchTime: 300
@@ -49463,7 +49548,10 @@ MonoBehaviour:
       name: "Du\u017Cy O\u015Brodek Badawczy"
       description: "Przestronne laboratoria, wielu wykwalifikowanych badaczy i profesjonalne
         wyposa\u017Cenie"
-      funFact: 
+      funFact: "Ostatnie badania nad technologiami magazynowania energii s\u0105
+        kluczowe dla skutecznego wykorzystania energii odnawialnej, eliminacji problem\xF3w
+        zwi\u0105zanych z niestabilno\u015Bci\u0105 dost\u0119pu do \u017Ar\xF3de\u0142
+        odnawialnych w okre\u015Blonych warunkach atmosferycznych"
       researchState: 0
       researchCost: 10000000
       researchTime: 420
