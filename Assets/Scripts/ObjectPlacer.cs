@@ -193,7 +193,7 @@ public class ObjectPlacer : MonoBehaviour
             instantiatedObject.gameObject.tag = objectControll.objectData.name;
             objectControll.isPlaced = true;
             objectControll.ToggleColliderState(CollisionState.Static);
-            objectControll.objectData.finishTime = Game.UnixTimeStamp();// +buildTime;
+            objectControll.objectData.finishTime = Game.UnixTimeStamp() +buildTime;
             objectControll.objectData.buildState = BuildState.Contstruction;
             objectControll.UpdateVisuals();
 
