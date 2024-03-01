@@ -335,7 +335,7 @@ public class ResourceStorage
 public class ResourceProduction
 {
     public ResourceType resource;
-    public int quantity;
+    public double quantity;
 
     public ResourceProduction() { }
 

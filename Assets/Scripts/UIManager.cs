@@ -49,13 +49,13 @@ public class UIManager : MonoBehaviour
             new Vector2(0f,  25f),
             new Vector2(90f, 25f),
             new Vector2(1000f, 0f),
-            new Vector2(0f, 0f)
+            new Vector2(215f, 0f)
         )},
         {ShopCategory.Nature, new UIPositions(
             new Vector2(0f,  -40f),
             new Vector2(90f, -40f),
             new Vector2(1000f, 0f),
-            new Vector2(0f, 0f)
+            new Vector2(215f, 0f)
         )},
         {ShopCategory.Infrastructure, new UIPositions(
             new Vector2(0f,  -105f),
