@@ -16,6 +16,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Reset()
+    {
+        SaveSystem.DeleteGameSave();
+    }
+
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
