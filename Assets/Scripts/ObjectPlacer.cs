@@ -37,6 +37,28 @@ public class ObjectPlacer : MonoBehaviour
         buildTime = time;
     }
 
+    public void PlaceFromSave(ObjectSaveData osd)
+    {
+        ObjectData data = new ObjectData(gameManager.researchManager.GetObjectTemplate(osd.name));
+
+        GameObject loadObject = Instantiate(objectToPlace);
+        loadObject.transform.position = new Vector3(osd.posX, osd.posY, osd.posZ);
+        loadObject.transform.parent = gameManager.GetRegion((Regions)osd.regionOrigin).gameObject.transform;
+
+        loadObject.layer = 6;
+        loadObject.name = osd.name;
+        loadObject.tag = osd.name;
+
+        Placeable objectConfig = loadObject.GetComponent<Placeable>();
+        objectConfig.objectData = data;
+        objectConfig.isPlaced = true;
+        objectConfig.objectData.efficiencyLevel = osd.level;
+        objectConfig.objectData.buildState = (BuildState)osd.buildState;
+        objectConfig.objectData.finishTime = osd.buildFinishTime;
+        objectConfig.ToggleColliderState(CollisionState.Static);
+        objectConfig.UpdateVisuals();
+    }
+
     void Start()
     {
         hoverManager = gameManager.gameObject.GetComponent<HoverManager>();

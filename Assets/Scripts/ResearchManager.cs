@@ -220,6 +220,35 @@ public class ResearchManager : MonoBehaviour
         return hasFinished;
     }
 
+    public void UpdateFromSave(ResearchSaveData rsd)
+    {
+        int index = 0;
+        foreach(ShopCard sC in shopItems)
+        {
+            if(sC.objectData.name == rsd.researchTarget) break;
+            index++;
+        }
+        if (index == shopItems.Length) return;
+        ResearchCard referencedCard = researchCardsReferences[((int)index * 3) + rsd.level - 1];
+        referencedCard.efficiencyLevel.researchFinishTime = rsd.researchFinishTime;
+        referencedCard.efficiencyLevel.researchState = (ResearchState)rsd.researchState;
+
+        if (referencedCard.efficiencyLevel.researchState == ResearchState.Researching) ongoingResearch.Add(referencedCard);
+
+        UpdateCorrespondingShopCard(referencedCard);
+        UpdateWorld(referencedCard);
+        referencedCard.UpdateVisuals();
+    }
+
+    public ObjectData GetObjectTemplate(string name)
+    {
+        foreach (ShopCard sC in shopItems)
+        {
+            if (sC.objectData.name == name) return sC.objectData;
+        }
+        return null;
+    }
+
     public void UpdateCorrespondingShopCard(ResearchCard rCard)
     {
         int levelIndex = GetLevelOneIndex(rCard);

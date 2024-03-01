@@ -42,6 +42,7 @@ public class ObjectInfoDisplay : MonoBehaviour
     {
         sfxManager.PlaySound(SoundEffect.Click);
         ToggleFunFact(!showFunFact);
+        UpdateDisplay();
     }
 
     public void ToggleFunFact(bool state)
@@ -54,8 +55,6 @@ public class ObjectInfoDisplay : MonoBehaviour
         showFunFact = state;
         funFactButtonImage.sprite = funFactButtonSprites[spriteId];
         funFactButtonImage.color = new Color(1f, 1f, 1f, opacity);
-
-        UpdateDisplay();
     }
 
     public void SetDisplay()
@@ -93,7 +92,6 @@ public class ObjectInfoDisplay : MonoBehaviour
     {
         if (placeable == null || data == null || placeable.gameObject == null)
         {
-            Debug.Log("DECONSTRUCTED");
             SetDisplay();
             return;
         }

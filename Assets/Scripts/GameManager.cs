@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public RegionManager regionManager;
     public GameObject researchFacility;
     public GameObject ministryFacility;
+    public ResearchManager researchManager;
+    public ObjectPlacer objectPlacer;
 
     public DateTime startDay = new DateTime(2024, 1, 1);
     public double daysPassed = 0;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public float hoursPerSecond = 12;
     float updateTimer = 0f;
+    float autoSaveTimer = 0f;
 
     public static bool IsCursorBusy()
     {
@@ -62,6 +65,10 @@ public class GameManager : MonoBehaviour
 
     public double GetPricePerKilowatt()
     {
+        if (ministryFacility == null)
+        {
+            ministryFacility = GameObject.FindGameObjectWithTag("Budynek Administracyjny");
+        }
         return pricePerKiloWatt[ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel - 1];
     }
 
@@ -72,11 +79,19 @@ public class GameManager : MonoBehaviour
 
     public int GetResearchCap()
     {
+        if(researchFacility == null)
+        {
+            researchFacility = GameObject.FindGameObjectWithTag("Oœrodek Badawczy");
+        }
         return researchFacility.GetComponent<Placeable>().objectData.efficiencyLevel;
     }
 
     public int GetBuildCap()
     {
+        if (ministryFacility == null)
+        {
+            ministryFacility = GameObject.FindGameObjectWithTag("Budynek Administracyjny");
+        }
         return ministryFacility.GetComponent<Placeable>().objectData.efficiencyLevel;
     }
 
@@ -114,6 +129,19 @@ public class GameManager : MonoBehaviour
         return countryData;
     }
 
+    public GameObject[] GetAllPlacedObjects()
+    {
+        List<GameObject> objects = new List<GameObject>();
+        Placeable[] copies = GameObject.FindObjectsOfType<Placeable>();
+        foreach(Placeable p in copies)
+        {
+            if (!p.isPlaced) continue;
+            objects.Add(p.gameObject);
+        }
+
+        return objects.ToArray();
+    }
+
     public RegionData GetRegionData(Regions region)
     {
         if(region == Regions.None)
@@ -129,7 +157,24 @@ public class GameManager : MonoBehaviour
             }
         }
         return null;
-    } 
+    }
+
+    public RegionHover GetRegion(Regions region)
+    {
+        if (region == Regions.None)
+        {
+            return null;
+        }
+
+        foreach (RegionHover rH in regions)
+        {
+            if (rH.region == region)
+            {
+                return rH;
+            }
+        }
+        return null;
+    }
 
     public List<ResourceProduction[]> GetResourceStatsInRegion(Regions region)
     {
@@ -244,6 +289,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
+        LoadGameFromSave();
     }
 
     public void TickRegions()
@@ -393,11 +439,79 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if (ministryFacility == null)
+        {
+            ministryFacility = GameObject.FindGameObjectWithTag("Budynek Administracyjny");
+        }
+        if (researchFacility == null)
+        {
+            researchFacility = GameObject.FindGameObjectWithTag("Oœrodek Badawczy");
+        }
+
         updateTimer += Time.deltaTime * hoursPerSecond;
         if (updateTimer < 24f) return;
         updateTimer = 0f;
         daysPassed++;
         UpdateUICalendar();
         TickRegions();
+    }
+
+    public void ManualSave()
+    {
+        SaveSystem.SaveGameState(new SaveData(this));
+        toastManager.Toast("Rêczny Zapis", ToastMode.Success, 5f);
+    }
+
+
+    public void LoadGameFromSave()
+    {
+        SaveData saveData = SaveSystem.LoadGameState();
+        if (saveData == null) return;
+
+        cash = saveData.cash;
+        daysPassed = saveData.daysPassed;
+
+        int index = 0;
+        foreach(RegionHover rHover in regions)
+        {
+            RegionSaveData rsd = saveData.regions[index];
+
+            rHover.regionData.population = rsd.population;
+            rHover.regionData.emmisionCO2 = rsd.emmisionCO2;
+            rHover.regionData.energyStored = rsd.energyStored;
+
+            index++;
+        }
+
+        Placeable[] placeableObjects = GameManager.FindObjectsOfType<Placeable>();
+        foreach(Placeable p in placeableObjects)
+        {
+            if (p.gameObject.layer == 6) Destroy(p.gameObject);
+        }
+
+        foreach(ObjectSaveData osd in saveData.objects)
+        {
+            objectPlacer.PlaceFromSave(osd);
+        }
+
+        foreach (ResearchSaveData rsd in saveData.researchLevels)
+        {
+            researchManager.UpdateFromSave(rsd);
+        }
+
+        GameObject rFacility = GameObject.FindGameObjectWithTag("Oœrodek Badawczy");
+        GameObject mFacility = GameObject.FindGameObjectWithTag("Budynek Administracyjny");
+
+        researchFacility = rFacility;
+        ministryFacility = mFacility;
+    }
+
+
+    public void LateUpdate()
+    {
+        autoSaveTimer += Time.deltaTime;
+        if (autoSaveTimer < 600f) return;
+        SaveSystem.SaveGameState(new SaveData(this));
+        toastManager.Toast("Automatyczny Zapis", ToastMode.Success, 5f);
     }
 }
