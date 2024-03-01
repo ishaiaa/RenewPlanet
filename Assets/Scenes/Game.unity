@@ -12998,7 +12998,10 @@ MonoBehaviour:
       timeCost: 300
       name: "Ma\u0142a Elektrownia W\u0119glowa"
       description: Skromna instalacja o ograniczonej mocy
-      funFact: 
+      funFact: "4 wrze\u015Bnia 1882 roku, Thomas Edison uruchomi\u0142 pierwsz\u0105
+        na \u015Bwiecie elektrowni\u0119 ciepln\u0105, nap\u0119dzan\u0105 silnikiem
+        parowym. Da\u0142a ona pr\u0105d 193-em budynkom mieszkalnym, co rozpocz\u0119\u0142o
+        er\u0119 elektryczno\u015Bci i powszechnego wykorzystanie pr\u0105du sta\u0142ego"
       researchState: 3
       researchCost: 0
       researchTime: 0
@@ -13017,7 +13020,10 @@ MonoBehaviour:
       timeCost: 600
       name: "\u015Arednia Elektrownia W\u0119glowa"
       description: "Efektywna jednostka energetyczna o umiarkowanej wydajno\u015Bci"
-      funFact: 
+      funFact: "W Polsce pierwsze ma\u0142e elektorwnie cieplne powsta\u0142y ju\u017C
+        w XIX w. Dostarcza\u0142y one pr\u0105d do fabryk w zag\u0142\u0119biach
+        w\u0142\xF3kienniczych. Pierwsza elektorwnia cieplna zasilaj\u0105ca miasto
+        powsta\u0142a w 1901 roku w Radomiu"
       researchState: 1
       researchCost: 1200000000
       researchTime: 300
@@ -13037,7 +13043,13 @@ MonoBehaviour:
       name: "Du\u017Ca Elektrownia W\u0119glowa"
       description: "Pot\u0119\u017Cna instalacja generuj\u0105ca du\u017C\u0105 ilo\u015B\u0107
         energii elektrycznej"
-      funFact: 
+      funFact: "Do wyprodukowania energii elektrycznej oraz ciep\u0142a potrzebna
+        jest wsp\xF3\u0142praca trzech g\u0142\xF3wnych urz\u0105dze\u0144: kot\u0142a,
+        turbiny oraz generatora. \u015Aciany kot\u0142a w kt\xF3rym spalany jest
+        w\u0119giel ekranowane s\u0105 za pomoc\u0105 rur z wod\u0105 o wysokim ci\u015Bnieniu,
+        woda odbiera ciep\u0142o i trafia do zbiornika gdzie odparowuje. Para ta
+        trafia do turbiny, powoduj\u0105c obr\xF3t tej turbiny, turbina ta po\u0142\u0105czona
+        jest z generatorem. W wyniku obrotu powstaje napi\u0119cie"
       researchState: 0
       researchCost: 2400000000
       researchTime: 600
@@ -26447,7 +26459,7 @@ RectTransform:
   m_GameObject: {fileID: 948411270}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1798940752}
@@ -26456,7 +26468,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 1260, y: 600}
+  m_SizeDelta: {x: 322.386, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &948411272
 MonoBehaviour:
@@ -26480,18 +26492,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 35
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 1
+    m_BestFit: 0
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0 GW/h
+  m_Text: 0,0 GW/h
 --- !u!222 &948411273
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26611,7 +26623,7 @@ RectTransform:
   m_GameObject: {fileID: 952117756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 505251196}
@@ -26620,7 +26632,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 3104, y: 600}
+  m_SizeDelta: {x: 776, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &952117758
 MonoBehaviour:
@@ -26644,16 +26656,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0 GW
 --- !u!222 &952117759
@@ -31363,7 +31375,7 @@ RectTransform:
   m_GameObject: {fileID: 1129492812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2061823764}
@@ -31372,7 +31384,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 3104, y: 600}
+  m_SizeDelta: {x: 776, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1129492814
 MonoBehaviour:
@@ -31396,16 +31408,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
 --- !u!222 &1129492815
@@ -34063,7 +34075,9 @@ MonoBehaviour:
       name: "Ma\u0142a Elektrownia S\u0142oneczna"
       description: "Niewielki zesp\xF3\u0142 paneli s\u0142onecznych dostarczaj\u0105cy
         lokalnej energii elektrycznej, idealny dla mniejszych spo\u0142eczno\u015Bci"
-      funFact: 
+      funFact: "Do stworzenia stworzenia koncepcji paneli s\u0142onecznych przyczyni\u0142o
+        si\u0119 odkrycie Polaka - Jana Czochralskiego, czyli nowa metoda produkcji
+        krzemu monokrystalicznego"
       researchState: 1
       researchCost: 2500000
       researchTime: 120
@@ -34082,9 +34096,11 @@ MonoBehaviour:
       description: "Efektywna farma s\u0142oneczna o umiarkowanej skali, sk\u0142adaj\u0105ca
         si\u0119 z szereg\xF3w paneli fotowoltaicznych, generuj\u0105ca umiarkowan\u0105
         ilo\u015B\u0107 energii"
-      funFact: 
+      funFact: "Pierwszy panel s\u0142oneczny powsta\u0142 w Bell Labolatories w
+        1954 roku. Zosta\u0142 stworzony przez Geralda Pearsona, Daryla Chaplina
+        i Calvina Fullera"
       researchState: 0
-      researchCost: 500000000
+      researchCost: 3500000
       researchTime: 180
       researchFinishTime: 0
       emmision: 10
@@ -34101,7 +34117,8 @@ MonoBehaviour:
       description: "Pot\u0119\u017Cna farma s\u0142oneczna sk\u0142adaj\u0105ca si\u0119
         z du\u017Cej ilo\u015Bci paneli fotowoltaicznych, zdolna do efektywnego wytwarzania
         du\u017Cych ilo\u015Bci pr\u0105du"
-      funFact: 
+      funFact: "Pierwszym zastosowaniem ogniw fotowoltaiczne by\u0142o zasilanie
+        satelit\xF3w ziemskich"
       researchState: 0
       researchCost: 5000000
       researchTime: 240
@@ -35527,7 +35544,9 @@ MonoBehaviour:
       name: "Ma\u0142a Elektrownia Wiatrowa"
       description: "Niewielka farma wiatrowa dostarczaj\u0105ca ograniczone ilo\u015Bci
         energii"
-      funFact: 
+      funFact: "Elektrownie wiatrowe istniej\u0105 nie tylko na l\u0105dzie, ale
+        i na morzu. W latach 90 XX.w w cie\u015Bninach du\u0144skich postawiono pierwsze
+        morskie turbiny wiatrowe"
       researchState: 1
       researchCost: 250000000
       researchTime: 120
@@ -35545,7 +35564,9 @@ MonoBehaviour:
       name: "\u015Arednia Elektrownia Wiatrowa"
       description: "Efektywna farma wiatrowa o umiarkowanej skali, z\u0142o\u017Cona
         z kilku turbin, generuj\u0105ca znaczn\u0105 ilo\u015B\u0107 energii elektrycznej"
-      funFact: 
+      funFact: "Pierwsz\u0105 turbin\u0119 wiatrow\u0105, skonstruowa\u0142 w 1887
+        roku James Blyth, u\u017Cywa\u0142 jej do zasilania o\u015Bwietlenia w swoim
+        domu"
       researchState: 0
       researchCost: 500000000
       researchTime: 180
@@ -35564,7 +35585,8 @@ MonoBehaviour:
       description: "Pot\u0119\u017Cna farma wiatrowa sk\u0142adaj\u0105ca si\u0119
         z wysokich turbin wiatrowych, zdolna do efektywnego wytwarzania du\u017Cej
         ilo\u015Bci pr\u0105du elektrycznego"
-      funFact: 
+      funFact: "Nowoczesne turbiny wiatrowe poruszaj\u0105 si\u0119 z pr\u0119dko\u015Bci\u0105
+        20 obrot\xF3w na minut\u0119"
       researchState: 0
       researchCost: 750000000
       researchTime: 240
@@ -40309,6 +40331,7 @@ MonoBehaviour:
   - {fileID: 1524679550}
   - {fileID: 989262520}
   hoursPerSecond: 12
+  defaultSaveFile: {fileID: 4900000, guid: f7f967bec36ebfc4789ccc2209b4a958, type: 3}
 --- !u!114 &1480427642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44820,7 +44843,7 @@ RectTransform:
   m_GameObject: {fileID: 1629686376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 934088658}
@@ -44829,7 +44852,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 3104, y: 600}
+  m_SizeDelta: {x: 776, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1629686378
 MonoBehaviour:
@@ -44853,18 +44876,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 1
+    m_BestFit: 0
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0,00
+  m_Text: 999 999 999 999 999
 --- !u!222 &1629686379
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -47772,7 +47795,8 @@ MonoBehaviour:
       timeCost: 300
       name: "Ma\u0142a Elektrownia Geotermalna"
       description: "Kompaktowa jednostka korzystaj\u0105ca z ciep\u0142a ziemskiego"
-      funFact: 
+      funFact: "Energia geotermalna jest najistotniejszym \u017Ar\xF3d\u0142em energii
+        na Islandii i Filipinach"
       researchState: 1
       researchCost: 500000000
       researchTime: 180
@@ -47790,7 +47814,8 @@ MonoBehaviour:
       name: "\u015Arednia Elektrownia Geotermalna"
       description: "Efektywna instalacja geotermalna o umiarkowanej skali, wykorzystuj\u0105ca
         ciep\u0142o ziemi do wytwarzania znacz\u0105cej ilo\u015Bci energii"
-      funFact: 
+      funFact: "G\u0142\xF3wnym sposobem pozyskiwania energii geotermalnej jest tworzenie
+        odwiert\xF3w do zbiornik\xF3w gor\u0105cych w\xF3d geotermalnych"
       researchState: 0
       researchCost: 1000000000
       researchTime: 210
@@ -47808,7 +47833,8 @@ MonoBehaviour:
       name: "Du\u017Ca Elektrownia Geotermalna"
       description: "Pot\u0119\u017Cna instalacja geotermalna generuj\u0105ca du\u017C\u0105
         moc elektryczn\u0105, zdolna zaspokoi\u0107 potrzeby du\u017Cych spo\u0142eczno\u015Bci"
-      funFact: 
+      funFact: "Wydobycie w\xF3d geotermalnych jest op\u0142acalne, gdy do g\u0142\u0119boko\u015Bci
+        2 kilometr\xF3w temperatura osi\u0105ga warto\u015B\u0107 65 \xB0C"
       researchState: 0
       researchCost: 2000000000
       researchTime: 360
@@ -56449,7 +56475,7 @@ RectTransform:
   m_GameObject: {fileID: 2099632384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1328900438}
@@ -56458,7 +56484,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 1220, y: 600}
+  m_SizeDelta: {x: 322.386, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2099632386
 MonoBehaviour:
@@ -56482,16 +56508,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 35
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0 GW/h
 --- !u!222 &2099632387
@@ -56609,7 +56635,7 @@ RectTransform:
   m_GameObject: {fileID: 2110389612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1320851755}
@@ -56618,7 +56644,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -25, y: 0}
-  m_SizeDelta: {x: 3104, y: 600}
+  m_SizeDelta: {x: 776, y: 120}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2110389614
 MonoBehaviour:
@@ -56642,16 +56668,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: bb42142b6f88a6444b9c2ddb7831abf9, type: 3}
-    m_FontSize: 300
+    m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0,00t
 --- !u!222 &2110389615

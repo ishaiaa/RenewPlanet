@@ -51,6 +51,8 @@ public class ObjectMover : MonoBehaviour
 
         foreach (Placeable placeable in intersectingObjects)
         {
+            if (placeable == null) continue;
+            if (placeable.gameObject == null) continue;
             placeable.ToggleColliderState(CollisionState.Static);
         }
         intersectingObjects.Clear();
@@ -136,7 +138,7 @@ public class ObjectMover : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (objectToMove.transform.parent.gameObject.GetComponent<RegionHover>().region != regionManager.selectedRegion && gameManager.DoesExistInRegion(objectControll, regionManager.selectedRegion))
+            if (objectToMove.transform.parent.gameObject.GetComponent<RegionHover>().region != regionManager.selectedRegion && objectControll.objectData.isRegionLimited && gameManager.DoesExistInRegion(objectControll, regionManager.selectedRegion))
             {
                 gameManager.toastManager.Toast("Mo¿esz umieœciæ tylko jeden taki budynek w regionie!", ToastMode.Error, 5f);
                 return;

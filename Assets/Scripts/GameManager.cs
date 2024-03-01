@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     float updateTimer = 0f;
     float autoSaveTimer = 0f;
 
+    public TextAsset defaultSaveFile;
+
     public static bool IsCursorBusy()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -323,6 +325,7 @@ public class GameManager : MonoBehaviour
                     {
                         region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
                         region.regionData.emmisionCO2 += data.efficiencyLevels[data.efficiencyLevel - 1].emmision;
+                        if(region.regionData.emmisionCO2 < 0) region.regionData.emmisionCO2 = 0;
                     }
                     else
                     {
@@ -331,11 +334,11 @@ public class GameManager : MonoBehaviour
                             switch (rC.resource)
                             {
                                 case (ResourceType.Coal):
-                                    if(rPC[1][0].quantity >= rC.quantity)
+                                    if(rPC[0][0].quantity >= rC.quantity)
                                     {
-                                        rPC[1][0].quantity -= rC.quantity;
+                                        rPC[0][0].quantity -= rC.quantity;
                                         region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
+                                        region.regionData.emmisionCO2 += data.efficiencyLevels[data.efficiencyLevel - 1].emmision;
                                     }
                                     else
                                     {
@@ -344,11 +347,11 @@ public class GameManager : MonoBehaviour
                                     }
                                     break;
                                 case (ResourceType.Uranium):
-                                    if (rPC[1][1].quantity >= rC.quantity)
+                                    if (rPC[0][1].quantity >= rC.quantity)
                                     {
-                                        rPC[1][1].quantity -= rC.quantity;
+                                        rPC[0][1].quantity -= rC.quantity;
                                         region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
+                                        region.regionData.emmisionCO2 += data.efficiencyLevels[data.efficiencyLevel - 1].emmision;
                                     }
                                     else
                                     {
@@ -357,11 +360,11 @@ public class GameManager : MonoBehaviour
                                     }
                                     break;
                                 case (ResourceType.Gas):
-                                    if (rPC[1][2].quantity >= rC.quantity)
+                                    if (rPC[0][2].quantity >= rC.quantity)
                                     {
-                                        rPC[1][2].quantity -= rC.quantity;
+                                        rPC[0][2].quantity -= rC.quantity;
                                         region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
-                                        region.regionData.energyStored += data.efficiencyLevels[data.efficiencyLevel - 1].energyProduction;
+                                        region.regionData.emmisionCO2 += data.efficiencyLevels[data.efficiencyLevel - 1].emmision;
                                     }
                                     else
                                     {
@@ -466,7 +469,12 @@ public class GameManager : MonoBehaviour
     public void LoadGameFromSave()
     {
         SaveData saveData = SaveSystem.LoadGameState();
+        if (saveData == null)
+        {
+            saveData = SaveSystem.LoadGameFromFile(defaultSaveFile);
+        }
         if (saveData == null) return;
+        
 
         cash = saveData.cash;
         daysPassed = saveData.daysPassed;
@@ -513,5 +521,6 @@ public class GameManager : MonoBehaviour
         if (autoSaveTimer < 600f) return;
         SaveSystem.SaveGameState(new SaveData(this));
         toastManager.Toast("Automatyczny Zapis", ToastMode.Success, 5f);
+        autoSaveTimer = 0f;
     }
 }

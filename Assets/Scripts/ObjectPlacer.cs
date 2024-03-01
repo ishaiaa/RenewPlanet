@@ -83,6 +83,8 @@ public class ObjectPlacer : MonoBehaviour
 
         foreach (Placeable placeable in intersectingObjects)
         {
+            if (placeable == null) continue;
+            if (placeable.gameObject == null) continue;
             placeable.ToggleColliderState(CollisionState.Static);
         }
         intersectingObjects.Clear();
@@ -171,7 +173,7 @@ public class ObjectPlacer : MonoBehaviour
                 gameManager.toastManager.Toast("Niewystarczaj¹ca iloœæ pieniêdzy!", ToastMode.Error, 5f);
                 return; //TOO LOW ON CASH
             }
-            if(gameManager.DoesExistInRegion(objectControll, regionManager.selectedRegion))
+            if(objectControll.objectData.isRegionLimited && gameManager.DoesExistInRegion(objectControll, regionManager.selectedRegion))
             {
                 gameManager.toastManager.Toast("Mo¿esz umieœciæ tylko jeden taki budynek w regionie!", ToastMode.Error, 5f);
                 return;

@@ -97,19 +97,19 @@ public class RegionInfoCard : MonoBehaviour
 
         energyProduction.infoCell.UpdateText("Produkcja Energii", Game.FormatUnits(data.energyProduction) + "W/dzień");
         energyConsumption.infoCell.UpdateText("Zużycie Energii", Game.FormatUnits(data.energyDemand) + "W/dzień");
-        energyStorage.infoCell.UpdateText("Zgromadzona Energia", Game.FormatUnits(data.energyStored));
+        energyStorage.infoCell.UpdateText("Zgromadzona Energia", Game.FormatUnits(data.energyStored) + "W");
 
         population.infoCell.UpdateText("Populacja Regionu", Game.FormatCash(data.population));
         area.infoCell.UpdateText("Powierzchnia Regionu", Game.FormatCash(data.area)+ "km²");
         emmisionCO2.infoCell.UpdateText("Emisja CO", Game.FormatCash(data.emmisionCO2));
 
         coalProduction.infoCell.UpdateText("Węgiel - Produkcja", Game.FormatCash(rPD[0][0].quantity) + "t/dzień");
-        uraniumProduction.infoCell.UpdateText("Uran - Produkcja", Game.FormatCash(rPD[0][1].quantity) + "t/dzień");
+        uraniumProduction.infoCell.UpdateText("Uran - Produkcja", rPD[0][1].quantity + "t/dzień");
         gasProduction.infoCell.UpdateText("Gaz Ziemny - Produkcja", Game.FormatCash(rPD[0][2].quantity) + "t/dzień");
 
         coalDemand.infoCell.UpdateText("Węgiel - Zużycie", Game.FormatCash(rPD[1][0].quantity) + "t/dzień");
-        uraniumDemand.infoCell.UpdateText("Uran - Zużycie", Game.FormatCash(rPD[1][0].quantity) + "t/dzień");
-        gasDemand.infoCell.UpdateText("Gaz Ziemny - Zużycie", Game.FormatCash(rPD[1][0].quantity) + "t/dzień");
+        uraniumDemand.infoCell.UpdateText("Uran - Zużycie", rPD[1][1].quantity + "t/dzień");
+        gasDemand.infoCell.UpdateText("Gaz Ziemny - Zużycie", Game.FormatCash(rPD[1][2].quantity) + "t/dzień");
 
     }
 
